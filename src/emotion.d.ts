@@ -11,7 +11,10 @@ declare module '@emotion/react' {
     font: {
       // YoonGothicBold: string;
     };
-    text: string;
+    color: {
+      black: string;
+      white: string;
+    };
     icon: typeof icon;
   }
 }

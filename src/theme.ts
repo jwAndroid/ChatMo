@@ -5,14 +5,17 @@ export const font = {
 };
 
 export const icon = {
-  //   chat: require('../assets/icons/chat.png'),
+  splashicon: require('../assets/icons/splashicon.png'),
 };
 
 export const lightTheme: Theme = {
   font: {
     //  YoonGothicBold: 'YoonGothicBold',
   },
-  text: '#000',
+  color: {
+    black: '#000',
+    white: '#fff',
+  },
   icon,
 };
 
@@ -20,6 +23,9 @@ export const darkTheme: Theme = {
   font: {
     //  YoonGothicBold: 'YoonGothicBold',
   },
-  text: '#fff',
+  color: {
+    black: '#000',
+    white: '#fff',
+  },
   icon,
 };

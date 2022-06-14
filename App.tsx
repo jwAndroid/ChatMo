@@ -2,14 +2,14 @@ import { memo, useMemo } from 'react';
 import { ThemeProvider } from '@emotion/react';
 
 import { lightTheme } from './src/theme';
-import { StyledText } from './src/components/common';
+import { Splash } from './src/screens';
 
 const App = () => {
   const theme = useMemo(() => lightTheme, []);
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledText>chat-mo</StyledText>
+      <Splash />
     </ThemeProvider>
   );
 };
