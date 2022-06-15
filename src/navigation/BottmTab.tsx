@@ -4,12 +4,15 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { useTheme } from '@emotion/react';
 
 import { MemosStack, StatisticsStack, SettingStack } from '../screens/stacks';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 const BottmTab = () => {
+  const theme = useTheme();
+
   const screenOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       headerShown: false,
@@ -21,7 +24,7 @@ const BottmTab = () => {
       tabBarIconStyle: { display: 'none' },
       tabBarStyle: {
         height: 56,
-        backgroundColor: '#303030',
+        backgroundColor: theme.color.tab.background,
       },
       tabBarHideOnKeyboard: true,
     }),
@@ -40,7 +43,7 @@ const BottmTab = () => {
             tabBarStyle: {
               display: routeName === 'Memo' ? 'flex' : 'none',
               height: 60,
-              backgroundColor: '#303030',
+              backgroundColor: theme.color.tab.background,
             },
             tabBarIconStyle: {
               display: 'none',
@@ -60,7 +63,7 @@ const BottmTab = () => {
             tabBarStyle: {
               display: routeName === 'Statistics' ? 'flex' : 'none',
               height: 60,
-              backgroundColor: '#303030',
+              backgroundColor: theme.color.tab.background,
             },
             tabBarIconStyle: {
               display: 'none',
@@ -80,7 +83,7 @@ const BottmTab = () => {
             tabBarStyle: {
               display: routeName === 'Setting' ? 'flex' : 'none',
               height: 60,
-              backgroundColor: '#303030',
+              backgroundColor: theme.color.tab.background,
             },
             tabBarIconStyle: {
               display: 'none',

@@ -15,6 +15,10 @@ export const lightTheme: Theme = {
   color: {
     black: '#000',
     white: '#fff',
+    tab: {
+      background: '#fff',
+      text: '#000',
+    },
   },
   background: '#fff',
   icon,
@@ -27,6 +31,10 @@ export const darkTheme: Theme = {
   color: {
     black: '#000',
     white: '#fff',
+    tab: {
+      background: 'gray',
+      text: '#fff',
+    },
   },
   background: 'gray',
   icon,
