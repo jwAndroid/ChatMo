@@ -1,10 +1,10 @@
 import { memo, useEffect, useState } from 'react';
-import { Text } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 import { cacheFonts, cacheImages } from '../api/cache';
 import { font, icon } from '../theme';
+import { Navigation } from '../navigation';
 
 const Container = styled.View(() => ({
   flex: 1,
@@ -38,7 +38,7 @@ const Splash = () => {
   }, []);
 
   return appIsReady ? (
-    <Text>setup navigation</Text>
+    <Navigation />
   ) : (
     <Container>
       <Logo source={theme.icon.splashicon} />

@@ -35,6 +35,7 @@
     "comma-dangle": "off",
     "no-console": "off",
     "object-curly-newline": "off",
-    "no-promise-executor-return": "off"
+    "no-promise-executor-return": "off",
+    "consistent-return": "off"
   }
 }
