@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useMemo } from 'react';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
@@ -10,8 +10,6 @@ import { MemosStack, StatisticsStack, SettingStack } from '../screens/stacks';
 const { Navigator, Screen } = createBottomTabNavigator();
 
 const BottmTab = () => {
-  const [isTabPress, setIsTabPress] = useState(false);
-
   const screenOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       headerShown: false,
@@ -29,18 +27,6 @@ const BottmTab = () => {
     }),
     []
   );
-
-  useEffect(() => {
-    if (isTabPress) {
-      const timeout = setTimeout(() => {
-        setIsTabPress(false);
-      }, 500);
-
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [isTabPress]);
 
   return (
     <Navigator screenOptions={screenOptions}>
@@ -62,11 +48,6 @@ const BottmTab = () => {
             tabBarLabel: '메모',
           };
         }}
-        listeners={{
-          tabPress: (e) => {
-            console.log(`Memo click! ${e}`);
-          },
-        }}
       />
 
       <Screen
@@ -87,11 +68,6 @@ const BottmTab = () => {
             tabBarLabel: '통계',
           };
         }}
-        listeners={{
-          tabPress: (e) => {
-            console.log(`Statistics click! ${e}`);
-          },
-        }}
       />
 
       <Screen
@@ -111,11 +87,6 @@ const BottmTab = () => {
             },
             tabBarLabel: '세팅',
           };
-        }}
-        listeners={{
-          tabPress: (e) => {
-            console.log(`Setting click! ${e}`);
-          },
         }}
       />
     </Navigator>
