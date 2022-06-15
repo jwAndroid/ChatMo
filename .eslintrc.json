@@ -36,6 +36,7 @@
     "no-console": "off",
     "object-curly-newline": "off",
     "no-promise-executor-return": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "react/require-default-props": "off"
   }
 }
