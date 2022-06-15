@@ -16,6 +16,7 @@ export const lightTheme: Theme = {
     black: '#000',
     white: '#fff',
   },
+  background: '#fff',
   icon,
 };
 
@@ -27,5 +28,6 @@ export const darkTheme: Theme = {
     black: '#000',
     white: '#fff',
   },
+  background: 'gray',
   icon,
 };

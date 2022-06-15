@@ -37,6 +37,7 @@
     "object-curly-newline": "off",
     "no-promise-executor-return": "off",
     "consistent-return": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "no-shadow": "off"
   }
 }
