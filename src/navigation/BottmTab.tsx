@@ -28,7 +28,7 @@ const BottmTab = () => {
       },
       tabBarHideOnKeyboard: true,
     }),
-    []
+    [theme.color.tab.background]
   );
 
   return (
