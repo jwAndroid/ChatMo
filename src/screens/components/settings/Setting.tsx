@@ -5,11 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
 
-const Container = styled.View({
+const Container = styled.View(({ theme }) => ({
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-});
+  backgroundColor: theme.background,
+}));
 
 const Setting = () => {
   const navigation = useNavigation<SettingScreenNavigationProp>();
