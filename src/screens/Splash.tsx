@@ -27,21 +27,19 @@ const Splash = () => {
 
   useEffect(() => {
     (async () => {
-      await Promise.all([cacheFonts(font), ...cacheImages(icon)]).then(
-        (resolve) => {
-          console.log(resolve);
-
-          setTimeout(() => {
-            setAppIsReady(true);
-          }, 3000);
-        }
-      );
+      await Promise.all([cacheFonts(font), ...cacheImages(icon)]);
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
-      await signInAnonymously(auth);
+      const { user } = await signInAnonymously(auth);
+
+      if (user.uid !== null && user.uid !== undefined) {
+        setTimeout(() => {
+          setAppIsReady(true);
+        }, 3000);
+      }
     })();
   }, []);
 
