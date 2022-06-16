@@ -32,23 +32,27 @@ const ThemeStyle = () => {
   const navigation = useNavigation<SettingScreenNavigationProp>();
 
   useEffect(() => {
+    navigation.addListener('beforeRemove', async () => {
+      await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
+    });
+  }, [navigation, isEnabled]);
+
+  useEffect(() => {
     (async () => {
       const storage = await AsyncStorage.getItem(APP_THEME_KEY);
 
-      if (storage === 'dark') {
-        setIsEnabled(true);
-      } else {
-        setIsEnabled(false);
-      }
+      setIsEnabled(storage === 'dark' ? true : false);
+
+      // if (storage === 'dark') {
+      //   setIsEnabled(true);
+      // } else {
+      //   setIsEnabled(false);
+      // }
     })();
   }, []);
 
   const backOnPress = useCallback(async () => {
-    if (isEnabled) {
-      await AsyncStorage.setItem(APP_THEME_KEY, 'dark');
-    } else {
-      await AsyncStorage.setItem(APP_THEME_KEY, 'white');
-    }
+    await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
 
     navigation.goBack();
   }, [navigation, isEnabled]);

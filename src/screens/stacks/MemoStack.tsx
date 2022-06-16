@@ -1,7 +1,6 @@
 import { memo, useMemo } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import {
-  CardStyleInterpolators,
   createStackNavigator,
   StackNavigationOptions,
   StackNavigationProp,
@@ -25,18 +24,6 @@ const MemoStack = () => {
   const screenOptions = useMemo<StackNavigationOptions>(
     () => ({
       headerShown: false,
-      headerStyle: {
-        height: 50,
-        backgroundColor: '#303030',
-      },
-      headerTitleAlign: 'center',
-      headerTitleStyle: {
-        fontSize: 16,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      headerTintColor: '#fff',
-      cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
     }),
     []
   );

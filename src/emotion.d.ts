@@ -14,6 +14,10 @@ declare module '@emotion/react' {
     color: {
       black: string;
       white: string;
+      tab: {
+        background: string;
+        text: string;
+      };
     };
     background: string;
     icon: typeof icon;
