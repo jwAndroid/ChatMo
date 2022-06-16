@@ -13,7 +13,7 @@ import { APP_THEME_KEY } from '../../../api/constants';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
-  backgroundColor: theme.background,
+  backgroundColor: theme.color.background,
 }));
 
 const ContentsContainer = styled.View(() => ({

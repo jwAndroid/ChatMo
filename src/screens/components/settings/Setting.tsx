@@ -9,7 +9,7 @@ const Container = styled.View(({ theme }) => ({
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: theme.background,
+  backgroundColor: theme.color.background,
 }));
 
 const Setting = () => {

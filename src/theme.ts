@@ -46,11 +46,14 @@ export const lightTheme: Theme = {
     gray_950: '#141414',
     gray_1000: '#0A0A0A',
     tab: {
-      background: '#fff',
-      text: '#000',
+      background: '#F2F3F5',
     },
+    header: {
+      background: '#F2F3F5',
+    },
+    background: '#F9F9F9',
   },
-  background: '#fff',
+
   icon,
 };
 
@@ -80,10 +83,12 @@ export const darkTheme: Theme = {
     gray_950: '#141414',
     gray_1000: '#0A0A0A',
     tab: {
-      background: 'gray',
-      text: '#fff',
+      background: '#19191A',
     },
+    header: {
+      background: '#0A0A0A',
+    },
+    background: 'gray',
   },
-  background: 'gray',
   icon,
 };

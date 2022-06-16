@@ -41,6 +41,7 @@
     "no-shadow": "off",
     "no-unneeded-ternary": "off",
     "react/no-unstable-nested-components": "off",
-    "react/jsx-no-undef": "off"
+    "react/jsx-no-undef": "off",
+    "react/style-prop-object": "off"
   }
 }

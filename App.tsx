@@ -1,8 +1,8 @@
 import { memo, useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
-import { ThemeProvider } from '@emotion/react';
+import { StatusBar } from 'expo-status-bar';
 import { EventRegister } from 'react-native-event-listeners';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ThemeProvider } from '@emotion/react';
 
 import { lightTheme, darkTheme } from './src/theme';
 import { Splash } from './src/screens';
@@ -10,14 +10,13 @@ import { APP_THEME_KEY } from './src/api/constants';
 
 const App = () => {
   const [theme, setTheme] = useState(lightTheme);
+  const [isWhite, setIsWhite] = useState(true);
 
   useEffect(() => {
     EventRegister.addEventListener('changeTheme', (data) => {
-      if (data) {
-        setTheme(lightTheme);
-      } else {
-        setTheme(darkTheme);
-      }
+      setTheme(data ? lightTheme : darkTheme);
+
+      setIsWhite(data);
     });
 
     return () => {
@@ -29,17 +28,15 @@ const App = () => {
     (async () => {
       const appTheme = await AsyncStorage.getItem(APP_THEME_KEY);
 
-      if (appTheme === 'white') {
-        setTheme(lightTheme);
-      } else {
-        setTheme(darkTheme);
-      }
+      setTheme(appTheme === 'white' ? lightTheme : darkTheme);
+
+      setIsWhite(appTheme === 'white' ? true : false);
     })();
   }, []);
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar barStyle="default" />
+      <StatusBar style={isWhite ? 'dark' : 'light'} />
 
       <Splash />
     </ThemeProvider>

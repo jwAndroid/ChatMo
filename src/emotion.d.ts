@@ -34,10 +34,12 @@ declare module '@emotion/react' {
       gray_1000: string;
       tab: {
         background: string;
-        text: string;
       };
+      header: {
+        background: string;
+      };
+      background: string;
     };
-    background: string;
     icon: typeof icon;
   }
 }
