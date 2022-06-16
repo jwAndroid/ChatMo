@@ -7,6 +7,7 @@ import { ThemeProvider } from '@emotion/react';
 import { lightTheme, darkTheme } from './src/theme';
 import { Splash } from './src/screens';
 import { APP_THEME_KEY } from './src/api/constants';
+import { Memo } from './src/screens/components/memos';
 
 const App = () => {
   const [theme, setTheme] = useState(lightTheme);
@@ -37,6 +38,8 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style={isWhite ? 'dark' : 'light'} />
+
+      {/* <Memo /> */}
 
       <Splash />
     </ThemeProvider>

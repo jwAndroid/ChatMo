@@ -3,6 +3,7 @@ import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
 
 export const cacheFonts = (font: { [fontFamily: string]: Font.FontSource }) => {
+  console.log(font);
   return Font.loadAsync(font);
 };
 

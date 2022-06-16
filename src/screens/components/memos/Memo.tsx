@@ -1,19 +1,24 @@
 import { memo } from 'react';
-import { Text } from 'react-native';
 import styled from '@emotion/native';
+import { useTheme } from '@emotion/react';
+
+import { Header } from '../../../components/common';
+import { SafeAreaContainer } from '../../../components/layout';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
   backgroundColor: theme.color.background,
 }));
 
 const Memo = () => {
+  const theme = useTheme();
+
   return (
-    <Container>
-      <Text>Memo Screen</Text>
-    </Container>
+    <SafeAreaContainer>
+      <Container>
+        <Header title="List" />
+      </Container>
+    </SafeAreaContainer>
   );
 };
 

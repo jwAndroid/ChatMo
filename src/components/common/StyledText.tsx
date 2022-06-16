@@ -17,6 +17,7 @@ const EmotionText = styled.Text<IEmotionText>(
     marginRight,
     marginTop,
     marginBottom,
+    fontFamily: theme.font.YoonGothicRegular,
   })
 );
 
