@@ -1,9 +1,5 @@
 import { FC, memo, ReactNode } from 'react';
-import {
-  GestureResponderEvent,
-  ImageSourcePropType,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { GestureResponderEvent, ImageSourcePropType } from 'react-native';
 import styled from '@emotion/native';
 
 import StyledText from './StyledText';
@@ -13,6 +9,7 @@ const HeaderContainer = styled.View(({ theme }) => ({
   width: '100%',
   height: 60,
   alignItems: 'center',
+  justifyContent: 'space-between',
   backgroundColor: 'gray',
 }));
 
@@ -47,7 +44,11 @@ const Header: FC<IHeader> = ({
 }) => {
   return (
     <HeaderContainer>
-      <StyledText marginLeft={20}>{title}</StyledText>
+      <StyledText>뒤로가기</StyledText>
+
+      <StyledText>제목</StyledText>
+
+      <StyledText>아이콘 div</StyledText>
     </HeaderContainer>
   );
 };
