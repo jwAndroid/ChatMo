@@ -6,10 +6,18 @@ export const font = {
 };
 
 export const icon = {
-  splash_white: require('../assets/icons/splash_white.png'),
-  splash_black: require('../assets/icons/splash_black.png'),
+  back_arrow_black: require('../assets/icons/back_arrow_black.png'),
+  back_arrow_white: require('../assets/icons/back_arrow_white.png'),
+  list_black: require('../assets/icons/list_black.png'),
+  list_white: require('../assets/icons/list_white.png'),
   logo_white: require('../assets/icons/logo_white.png'),
   logo_black: require('../assets/icons/logo_black.png'),
+  settings_black: require('../assets/icons/settings_black.png'),
+  settings_white: require('../assets/icons/settings_white.png'),
+  splash_white: require('../assets/icons/splash_white.png'),
+  splash_black: require('../assets/icons/splash_black.png'),
+  statistic_black: require('../assets/icons/statistic_black.png'),
+  statistic_white: require('../assets/icons/statistic_white.png'),
 };
 
 export const lightTheme: Theme = {

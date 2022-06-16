@@ -39,6 +39,8 @@
     "consistent-return": "off",
     "react/require-default-props": "off",
     "no-shadow": "off",
-    "no-unneeded-ternary": "off"
+    "no-unneeded-ternary": "off",
+    "react/no-unstable-nested-components": "off",
+    "react/jsx-no-undef": "off"
   }
 }

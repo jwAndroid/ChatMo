@@ -1,30 +1,54 @@
-import { memo, useMemo } from 'react';
+import { memo, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { Image } from 'react-native';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { EventRegister } from 'react-native-event-listeners';
 import { useTheme } from '@emotion/react';
 
 import { MemosStack, StatisticsStack, SettingStack } from '../screens/stacks';
+import { APP_THEME_KEY } from '../api/constants';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 const BottmTab = () => {
   const theme = useTheme();
 
+  const [isWhite, setIsWhite] = useState(true);
+
+  useLayoutEffect(() => {
+    (async () => {
+      const storage = await AsyncStorage.getItem(APP_THEME_KEY);
+
+      setIsWhite(storage === 'dark' ? false : true);
+    })();
+  }, []);
+
+  useEffect(() => {
+    EventRegister.addEventListener('changeTheme', (data) => {
+      setIsWhite(data);
+    });
+
+    return () => {
+      EventRegister.removeEventListener('changeTheme');
+    };
+  }, []);
+
   const screenOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       headerShown: false,
-      tabBarLabelPosition: 'beside-icon',
-      tabBarLabelStyle: {
-        fontWeight: '700',
-        fontSize: 15,
-      },
-      tabBarIconStyle: { display: 'none' },
+      tabBarShowLabel: false,
       tabBarStyle: {
-        height: 56,
+        height: 60,
         backgroundColor: theme.color.tab.background,
+      },
+      tabBarIconStyle: { flex: 1 },
+      tabBarItemStyle: {
+        flex: 1,
+        justifyContent: 'center',
       },
       tabBarHideOnKeyboard: true,
     }),
@@ -45,10 +69,16 @@ const BottmTab = () => {
               height: 60,
               backgroundColor: theme.color.tab.background,
             },
-            tabBarIconStyle: {
-              display: 'none',
+            tabBarIcon: ({ size }) => {
+              return (
+                <Image
+                  source={
+                    isWhite ? theme.icon.list_black : theme.icon.list_white
+                  }
+                  style={{ width: size, height: size }}
+                />
+              );
             },
-            tabBarLabel: '메모',
           };
         }}
       />
@@ -65,10 +95,18 @@ const BottmTab = () => {
               height: 60,
               backgroundColor: theme.color.tab.background,
             },
-            tabBarIconStyle: {
-              display: 'none',
+            tabBarIcon: ({ size }) => {
+              return (
+                <Image
+                  source={
+                    isWhite
+                      ? theme.icon.statistic_black
+                      : theme.icon.statistic_white
+                  }
+                  style={{ width: size, height: size }}
+                />
+              );
             },
-            tabBarLabel: '통계',
           };
         }}
       />
@@ -85,10 +123,18 @@ const BottmTab = () => {
               height: 60,
               backgroundColor: theme.color.tab.background,
             },
-            tabBarIconStyle: {
-              display: 'none',
+            tabBarIcon: ({ size }) => {
+              return (
+                <Image
+                  source={
+                    isWhite
+                      ? theme.icon.settings_black
+                      : theme.icon.settings_white
+                  }
+                  style={{ width: size, height: size }}
+                />
+              );
             },
-            tabBarLabel: '세팅',
           };
         }}
       />
