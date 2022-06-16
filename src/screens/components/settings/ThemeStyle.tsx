@@ -68,7 +68,7 @@ const ThemeStyle = () => {
       <Container>
         <Header
           title="테마 설정"
-          backIcon={theme.icon.splashicon}
+          backIcon={theme.icon.logo_black}
           backOnPress={backOnPress}
         />
 

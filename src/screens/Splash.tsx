@@ -1,29 +1,52 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useState } from 'react';
+import { StatusBar } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { signInAnonymously } from 'firebase/auth';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
-import { signInAnonymously } from 'firebase/auth';
 
 import { cacheFonts, cacheImages } from '../api/cache';
 import { font, icon } from '../theme';
 import { Navigation } from '../navigation';
 import { auth } from '../api/firebase';
+import { APP_THEME_KEY } from '../api/constants';
 
-const Container = styled.View(() => ({
+interface ILogoContainer {
+  isWhite: boolean;
+}
+
+const LogoContainer = styled.View<ILogoContainer>(({ theme, isWhite }) => ({
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'gray',
+  padding: 50,
+  backgroundColor: isWhite ? theme.color.white : theme.color.black,
 }));
 
 const Logo = styled.Image({
-  width: 100,
-  height: 100,
+  width: '100%',
+  resizeMode: 'contain',
 });
 
 const Splash = () => {
   const theme = useTheme();
 
   const [appIsReady, setAppIsReady] = useState(false);
+  const [isWhite, setIsWhite] = useState(true);
+
+  useLayoutEffect(() => {
+    StatusBar.setHidden(true);
+  }, []);
+
+  useLayoutEffect(() => {
+    (async () => {
+      const appTheme = await AsyncStorage.getItem(APP_THEME_KEY);
+
+      if (appTheme !== null && appTheme !== undefined) {
+        setIsWhite(appTheme === 'white' ? true : false);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -46,9 +69,11 @@ const Splash = () => {
   return appIsReady ? (
     <Navigation />
   ) : (
-    <Container>
-      <Logo source={theme.icon.splashicon} />
-    </Container>
+    <LogoContainer isWhite={isWhite}>
+      <Logo
+        source={isWhite ? theme.icon.splash_black : theme.icon.splash_white}
+      />
+    </LogoContainer>
   );
 };
 
