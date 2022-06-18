@@ -30,7 +30,6 @@ const Logo = styled.Image({
 
 const Splash = () => {
   const theme = useTheme();
-
   const [appIsReady, setAppIsReady] = useState(false);
   const [isWhite, setIsWhite] = useState(true);
 

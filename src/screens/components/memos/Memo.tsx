@@ -1,9 +1,8 @@
 import { memo } from 'react';
 import styled from '@emotion/native';
-import { useTheme } from '@emotion/react';
 
-import { Header } from '../../../components/common';
 import { SafeAreaContainer } from '../../../components/layout';
+import { StackHeader } from '../../../components/common';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -11,12 +10,10 @@ const Container = styled.View(({ theme }) => ({
 }));
 
 const Memo = () => {
-  const theme = useTheme();
-
   return (
     <SafeAreaContainer>
       <Container>
-        <Header title="List" />
+        <StackHeader title="List" />
       </Container>
     </SafeAreaContainer>
   );

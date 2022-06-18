@@ -5,6 +5,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EventRegister } from 'react-native-event-listeners';
 import { useTheme } from '@emotion/react';
@@ -15,6 +16,8 @@ import { APP_THEME_KEY } from '../api/constants';
 const { Navigator, Screen } = createBottomTabNavigator();
 
 const BottmTab = () => {
+  const insets = useSafeAreaInsets();
+
   const theme = useTheme();
 
   const [isWhite, setIsWhite] = useState(true);
@@ -42,17 +45,17 @@ const BottmTab = () => {
       headerShown: false,
       tabBarShowLabel: false,
       tabBarStyle: {
-        height: 60,
+        height: 50 + insets.bottom / 2,
         backgroundColor: theme.color.tab.background,
       },
-      tabBarIconStyle: { flex: 1 },
+      tabBarIconStyle: { flex: 0 },
       tabBarItemStyle: {
         flex: 1,
         justifyContent: 'center',
       },
       tabBarHideOnKeyboard: true,
     }),
-    [theme.color.tab.background]
+    [insets, theme]
   );
 
   return (
@@ -66,16 +69,16 @@ const BottmTab = () => {
           return {
             tabBarStyle: {
               display: routeName === 'Memo' ? 'flex' : 'none',
-              height: 60,
+              height: 50 + insets.bottom / 2,
               backgroundColor: theme.color.tab.background,
             },
-            tabBarIcon: ({ size }) => {
+            tabBarIcon: () => {
               return (
                 <Image
                   source={
                     isWhite ? theme.icon.list_black : theme.icon.list_white
                   }
-                  style={{ width: size, height: size }}
+                  style={{ width: 22, height: 22 }}
                 />
               );
             },
@@ -92,10 +95,10 @@ const BottmTab = () => {
           return {
             tabBarStyle: {
               display: routeName === 'Statistics' ? 'flex' : 'none',
-              height: 60,
+              height: 50 + insets.bottom / 2,
               backgroundColor: theme.color.tab.background,
             },
-            tabBarIcon: ({ size }) => {
+            tabBarIcon: () => {
               return (
                 <Image
                   source={
@@ -103,7 +106,7 @@ const BottmTab = () => {
                       ? theme.icon.statistic_black
                       : theme.icon.statistic_white
                   }
-                  style={{ width: size, height: size }}
+                  style={{ width: 22, height: 22 }}
                 />
               );
             },
@@ -120,10 +123,10 @@ const BottmTab = () => {
           return {
             tabBarStyle: {
               display: routeName === 'Setting' ? 'flex' : 'none',
-              height: 60,
+              height: 50 + insets.bottom / 2,
               backgroundColor: theme.color.tab.background,
             },
-            tabBarIcon: ({ size }) => {
+            tabBarIcon: () => {
               return (
                 <Image
                   source={
@@ -131,7 +134,7 @@ const BottmTab = () => {
                       ? theme.icon.settings_black
                       : theme.icon.settings_white
                   }
-                  style={{ width: size, height: size }}
+                  style={{ width: 22, height: 22 }}
                 />
               );
             },

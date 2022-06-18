@@ -1,14 +1,15 @@
 import { memo, useCallback } from 'react';
-import { Text } from 'react-native';
-import styled from '@emotion/native';
 import { useNavigation } from '@react-navigation/native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import styled from '@emotion/native';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
+import { SafeAreaContainer } from '../../../components/layout';
+import { StackHeader, StyledText } from '../../../components/common';
+import Divider from '../../../components/common/Divider';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
   backgroundColor: theme.color.background,
 }));
 
@@ -20,9 +21,24 @@ const Setting = () => {
   }, [navigation]);
 
   return (
-    <Container>
-      <Text onPress={onPress}>go ThemeStyle Screen</Text>
-    </Container>
+    <SafeAreaContainer>
+      <Container>
+        <StackHeader title="Setting" />
+
+        <TouchableWithoutFeedback onPress={onPress}>
+          <StyledText
+            marginLeft={20}
+            marginTop={15}
+            marginBottom={15}
+            fontSize={14}
+          >
+            테마설정
+          </StyledText>
+        </TouchableWithoutFeedback>
+
+        <Divider />
+      </Container>
+    </SafeAreaContainer>
   );
 };
 

@@ -2,12 +2,12 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Switch } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useTheme } from '@emotion/react';
+// import { useTheme } from '@emotion/react';
 import { EventRegister } from 'react-native-event-listeners';
 import styled from '@emotion/native';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
-import { Header, StyledText } from '../../../components/common';
+import { StyledText } from '../../../components/common';
 import { SafeAreaContainer } from '../../../components/layout';
 import { APP_THEME_KEY } from '../../../api/constants';
 
@@ -27,7 +27,7 @@ const ContentsContainer = styled.View(() => ({
 const ThemeStyle = () => {
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const navigation = useNavigation<SettingScreenNavigationProp>();
 
@@ -42,20 +42,14 @@ const ThemeStyle = () => {
       const storage = await AsyncStorage.getItem(APP_THEME_KEY);
 
       setIsEnabled(storage === 'dark' ? true : false);
-
-      // if (storage === 'dark') {
-      //   setIsEnabled(true);
-      // } else {
-      //   setIsEnabled(false);
-      // }
     })();
   }, []);
 
-  const backOnPress = useCallback(async () => {
-    await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
+  // const backOnPress = useCallback(async () => {
+  //   await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
 
-    navigation.goBack();
-  }, [navigation, isEnabled]);
+  //   navigation.goBack();
+  // }, [navigation, isEnabled]);
 
   const onValueChange = useCallback(() => {
     setIsEnabled((prev) => !prev);
@@ -66,12 +60,6 @@ const ThemeStyle = () => {
   return (
     <SafeAreaContainer>
       <Container>
-        <Header
-          title="테마 설정"
-          backIcon={theme.icon.logo_black}
-          backOnPress={backOnPress}
-        />
-
         <StyledText fontSize={18} marginLeft={20} marginTop={20}>
           앱 테마 설정
         </StyledText>

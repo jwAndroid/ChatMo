@@ -28,6 +28,7 @@ export const lightTheme: Theme = {
   color: {
     black: '#000',
     white: '#fff',
+    text: '#303030',
     gray_20: '#F9F9F9',
     gray_40: '#F2F3F5',
     gray_50: '#EBEDF0',
@@ -51,9 +52,9 @@ export const lightTheme: Theme = {
     header: {
       background: '#F2F3F5',
     },
+    divider: '#cccccc',
     background: '#F9F9F9',
   },
-
   icon,
 };
 
@@ -65,6 +66,7 @@ export const darkTheme: Theme = {
   color: {
     black: '#000000',
     white: '#ffffff',
+    text: '#ffffff',
     gray_20: '#F9F9F9',
     gray_40: '#F2F3F5',
     gray_50: '#EBEDF0',
@@ -83,11 +85,12 @@ export const darkTheme: Theme = {
     gray_950: '#141414',
     gray_1000: '#0A0A0A',
     tab: {
-      background: '#19191A',
+      background: '#0A0A0A',
     },
     header: {
       background: '#0A0A0A',
     },
+    divider: '#555555',
     background: 'gray',
   },
   icon,
