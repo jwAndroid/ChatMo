@@ -3,6 +3,7 @@ import styled from '@emotion/native';
 
 interface IEmotionText {
   fontSize?: number;
+  color?: string;
   marginLeft?: number;
   marginRight?: number;
   marginTop?: number;
@@ -14,13 +15,14 @@ const EmotionText = styled.Text<IEmotionText>(
   ({
     theme,
     fontSize,
+    color,
     isBlod,
     marginLeft,
     marginRight,
     marginTop,
     marginBottom,
   }) => ({
-    color: theme.color.text,
+    color,
     fontSize,
     marginLeft,
     marginRight,
@@ -35,6 +37,7 @@ const EmotionText = styled.Text<IEmotionText>(
 interface IStyledText {
   children: ReactNode;
   fontSize?: number;
+  color?: string;
   isBlod?: boolean;
   marginLeft?: number;
   marginRight?: number;
@@ -45,6 +48,7 @@ interface IStyledText {
 const StyledText: FC<IStyledText> = ({
   children,
   fontSize,
+  color,
   isBlod = false,
   marginLeft,
   marginRight,
@@ -54,6 +58,7 @@ const StyledText: FC<IStyledText> = ({
   return (
     <EmotionText
       fontSize={fontSize}
+      color={color}
       isBlod={isBlod}
       marginLeft={marginLeft}
       marginRight={marginRight}

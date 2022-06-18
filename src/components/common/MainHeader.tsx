@@ -1,6 +1,7 @@
 import { FC, memo, ReactNode } from 'react';
 import { Platform } from 'react-native';
 import styled from '@emotion/native';
+import { useTheme } from '@emotion/react';
 
 import StyledText from './StyledText';
 
@@ -44,10 +45,14 @@ interface IHeader {
 }
 
 const StackHeader: FC<IHeader> = ({ title }) => {
+  const theme = useTheme();
+
   return (
     <ShadowContainer>
       <HeaderContainer>
-        <StyledText isBlod>{title}</StyledText>
+        <StyledText color={theme.color.text} isBlod>
+          {title}
+        </StyledText>
       </HeaderContainer>
     </ShadowContainer>
   );

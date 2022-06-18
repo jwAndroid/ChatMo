@@ -2,6 +2,7 @@ import { memo, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import styled from '@emotion/native';
+import { useTheme } from '@emotion/react';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
 import { SafeAreaContainer } from '../../../components/layout';
@@ -13,6 +14,8 @@ const Container = styled.View(({ theme }) => ({
 }));
 
 const Setting = () => {
+  const theme = useTheme();
+
   const navigation = useNavigation<SettingScreenNavigationProp>();
 
   const onPress = useCallback(() => {
@@ -26,10 +29,11 @@ const Setting = () => {
 
         <TouchableWithoutFeedback onPress={onPress}>
           <StyledText
+            fontSize={14}
+            color={theme.color.text}
             marginLeft={20}
             marginTop={15}
             marginBottom={15}
-            fontSize={14}
           >
             테마설정
           </StyledText>

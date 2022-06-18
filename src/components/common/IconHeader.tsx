@@ -101,7 +101,7 @@ const IconHeader: FC<IIconHeader> = ({
 
       <TitleContainer>
         {title && (
-          <StyledText isBlod fontSize={15}>
+          <StyledText isBlod fontSize={15} color={theme.color.text}>
             {title}
           </StyledText>
         )}
