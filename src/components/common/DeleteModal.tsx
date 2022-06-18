@@ -1,4 +1,4 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, { FC, memo } from 'react';
 import { GestureResponderEvent, Modal } from 'react-native';
 import styled from '@emotion/native';
 
@@ -50,15 +50,17 @@ const ModalText = styled.Text(({ theme }) => ({
 
 interface ILeaveModal {
   isOpen: boolean;
+  notification: string;
   onNegative: () => void;
   onPostive: (event: GestureResponderEvent) => void;
 }
 
-const DeleteModal: FC<ILeaveModal> = ({ isOpen, onNegative, onPostive }) => {
-  const notification = useMemo(() => {
-    return '채팅방에서 나가시겠습니까?\n나가기를 하면 대화내용이 모두 삭제되고\n채팅목록에서도 삭제됩니다.';
-  }, []);
-
+const DeleteModal: FC<ILeaveModal> = ({
+  isOpen,
+  notification,
+  onNegative,
+  onPostive,
+}) => {
   return (
     <Modal
       transparent
