@@ -68,7 +68,7 @@ export const darkTheme: Theme = {
     white: '#ffffff',
     text: '#ffffff',
     divider: '#555555',
-    background: 'gray',
+    background: '#232324',
     gray_20: '#F9F9F9',
     gray_40: '#F2F3F5',
     gray_50: '#EBEDF0',

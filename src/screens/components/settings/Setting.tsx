@@ -40,6 +40,34 @@ const Setting = () => {
         </TouchableWithoutFeedback>
 
         <Divider />
+
+        <TouchableWithoutFeedback>
+          <StyledText
+            fontSize={14}
+            color={theme.color.text}
+            marginLeft={20}
+            marginTop={15}
+            marginBottom={15}
+          >
+            이용약관
+          </StyledText>
+        </TouchableWithoutFeedback>
+
+        <Divider />
+
+        <TouchableWithoutFeedback>
+          <StyledText
+            fontSize={14}
+            color={theme.color.text}
+            marginLeft={20}
+            marginTop={15}
+            marginBottom={15}
+          >
+            개인정보보호
+          </StyledText>
+        </TouchableWithoutFeedback>
+
+        <Divider />
       </Container>
     </SafeAreaContainer>
   );
