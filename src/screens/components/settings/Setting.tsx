@@ -5,8 +5,7 @@ import styled from '@emotion/native';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
 import { SafeAreaContainer } from '../../../components/layout';
-import { StackHeader, StyledText } from '../../../components/common';
-import Divider from '../../../components/common/Divider';
+import { Divider, MainHeader, StyledText } from '../../../components/common';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -23,7 +22,7 @@ const Setting = () => {
   return (
     <SafeAreaContainer>
       <Container>
-        <StackHeader title="Setting" />
+        <MainHeader title="Setting" />
 
         <TouchableWithoutFeedback onPress={onPress}>
           <StyledText

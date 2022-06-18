@@ -2,7 +2,7 @@ import { memo } from 'react';
 import styled from '@emotion/native';
 
 import { SafeAreaContainer } from '../../../components/layout';
-import { StackHeader } from '../../../components/common';
+import { MainHeader } from '../../../components/common';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -13,7 +13,7 @@ const Memo = () => {
   return (
     <SafeAreaContainer>
       <Container>
-        <StackHeader title="List" />
+        <MainHeader title="List" />
       </Container>
     </SafeAreaContainer>
   );

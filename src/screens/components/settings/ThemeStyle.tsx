@@ -2,12 +2,11 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Switch } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { useTheme } from '@emotion/react';
 import { EventRegister } from 'react-native-event-listeners';
 import styled from '@emotion/native';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
-import { StyledText } from '../../../components/common';
+import { IconHeader, StyledText } from '../../../components/common';
 import { SafeAreaContainer } from '../../../components/layout';
 import { APP_THEME_KEY } from '../../../api/constants';
 
@@ -27,8 +26,6 @@ const ContentsContainer = styled.View(() => ({
 const ThemeStyle = () => {
   const [isEnabled, setIsEnabled] = useState(false);
 
-  // const theme = useTheme();
-
   const navigation = useNavigation<SettingScreenNavigationProp>();
 
   useEffect(() => {
@@ -45,11 +42,11 @@ const ThemeStyle = () => {
     })();
   }, []);
 
-  // const backOnPress = useCallback(async () => {
-  //   await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
+  const backOnPress = useCallback(async () => {
+    await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
 
-  //   navigation.goBack();
-  // }, [navigation, isEnabled]);
+    navigation.goBack();
+  }, [navigation, isEnabled]);
 
   const onValueChange = useCallback(() => {
     setIsEnabled((prev) => !prev);
@@ -60,6 +57,8 @@ const ThemeStyle = () => {
   return (
     <SafeAreaContainer>
       <Container>
+        <IconHeader onBackPress={backOnPress} title="설정" backIcon />
+
         <StyledText fontSize={18} marginLeft={20} marginTop={20}>
           앱 테마 설정
         </StyledText>
@@ -70,8 +69,8 @@ const ThemeStyle = () => {
           </StyledText>
 
           <Switch
-            trackColor={{ false: '#767577', true: '#81b0ff' }}
-            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+            trackColor={{ false: '#767577', true: '#767577' }}
+            thumbColor={isEnabled ? '#529EF4' : '#f4f3f4'}
             ios_backgroundColor="#3e3e3e"
             onValueChange={onValueChange}
             value={isEnabled}

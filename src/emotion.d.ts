@@ -16,6 +16,8 @@ declare module '@emotion/react' {
       black: string;
       white: string;
       text: string;
+      divider: string;
+      background: string;
       gray_20: string;
       gray_40: string;
       gray_50: string;
@@ -39,8 +41,6 @@ declare module '@emotion/react' {
       header: {
         background: string;
       };
-      divider: string;
-      background: string;
     };
     icon: typeof icon;
   }
