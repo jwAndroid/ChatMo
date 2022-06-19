@@ -1,7 +1,13 @@
-import { memo, useCallback, useEffect, useState } from 'react';
-import { GiftedChat, IMessage } from 'react-native-gifted-chat';
+import { memo, ReactNode, useCallback, useEffect, useState } from 'react';
+import {
+  GiftedChat,
+  IMessage,
+  Bubble,
+  BubbleProps,
+} from 'react-native-gifted-chat';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { getAuth } from 'firebase/auth';
+import styled from '@emotion/native';
 
 import {
   MemoScreenNavigationProp,
@@ -10,6 +16,11 @@ import {
 import { RoomEntity } from '../../../entity';
 import { IconHeader } from '../../../components/common';
 import { SafeAreaContainer } from '../../../components/layout';
+
+const Container = styled.View(() => ({
+  flex: 1,
+  backgroundColor: 'gray',
+}));
 
 const Room = () => {
   const [messages, setMessages] = useState<IMessage[]>([]);
@@ -62,18 +73,44 @@ const Room = () => {
     navigation.goBack();
   }, [navigation]);
 
+  const renderBubble = useCallback(
+    (
+      props: Readonly<BubbleProps<IMessage>> &
+        Readonly<{ children?: ReactNode }>
+    ) => {
+      return (
+        <Bubble
+          {...props}
+          wrapperStyle={{
+            right: {
+              backgroundColor: '#6646ee',
+            },
+          }}
+          textStyle={{
+            right: {
+              color: '#fff',
+            },
+          }}
+        />
+      );
+    },
+    []
+  );
+
   return (
     <SafeAreaContainer>
-      <IconHeader onBackPress={onBackPress} title="설정" backIcon />
+      <Container>
+        <IconHeader onBackPress={onBackPress} title="설정" backIcon />
 
-      <GiftedChat
-        alignTop
-        messages={messages}
-        alwaysShowSend
-        keyboardShouldPersistTaps="handled"
-        onSend={(messages) => onSend(messages)}
-        user={{ _id: uid }}
-      />
+        <GiftedChat
+          alignTop
+          messages={messages}
+          renderBubble={renderBubble}
+          keyboardShouldPersistTaps="handled"
+          onSend={(messages) => onSend(messages)}
+          user={{ _id: uid, name: 'user' }}
+        />
+      </Container>
     </SafeAreaContainer>
   );
 };
