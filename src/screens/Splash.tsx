@@ -1,7 +1,8 @@
-import { memo, useEffect, useLayoutEffect, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { signInAnonymously } from 'firebase/auth';
+import NetInfo from '@react-native-community/netinfo';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
@@ -10,6 +11,7 @@ import { font, icon } from '../theme';
 import { Navigation } from '../navigation';
 import { auth } from '../api/firebase';
 import { APP_THEME_KEY } from '../api/constants';
+import { TextModal } from '../components/common';
 
 interface ILogoContainer {
   isWhite: boolean;
@@ -32,9 +34,31 @@ const Splash = () => {
   const theme = useTheme();
   const [appIsReady, setAppIsReady] = useState(false);
   const [isWhite, setIsWhite] = useState(true);
+  const [cacheReady, setCacheReady] = useState(false);
+  const [isConnected, setIsConnected] = useState<boolean | null>();
+
+  const notification = useMemo(() => {
+    return '챗모 앱 서비스를 사용하기 위해,\n네트워크 연결을 확인해주세요.';
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      await Promise.all([cacheFonts(font), ...cacheImages(icon)]).then(() => {
+        setCacheReady(true);
+      });
+    })();
+  }, []);
 
   useLayoutEffect(() => {
     StatusBar.setHidden(true);
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   useLayoutEffect(() => {
@@ -49,29 +73,25 @@ const Splash = () => {
 
   useEffect(() => {
     (async () => {
-      await Promise.all([cacheFonts(font), ...cacheImages(icon)]);
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
       const { user } = await signInAnonymously(auth);
 
-      if (user.uid !== null && user.uid !== undefined) {
+      if (user.uid !== null && isConnected && cacheReady) {
         setTimeout(() => {
           setAppIsReady(true);
         }, 3000);
       }
     })();
-  }, []);
+  }, [isConnected, cacheReady]);
 
-  return appIsReady ? (
+  return appIsReady && isConnected && cacheReady ? (
     <Navigation />
   ) : (
     <LogoContainer isWhite={isWhite}>
       <Logo
         source={isWhite ? theme.icon.splash_black : theme.icon.splash_white}
       />
+
+      {!isConnected && <TextModal isOpen notification={notification} />}
     </LogoContainer>
   );
 };
