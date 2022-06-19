@@ -55,7 +55,7 @@ interface ILeaveModal {
   onPostive: (event: GestureResponderEvent) => void;
 }
 
-const DeleteModal: FC<ILeaveModal> = ({
+const ButtonModal: FC<ILeaveModal> = ({
   isOpen,
   notification,
   onNegative,
@@ -95,4 +95,4 @@ const DeleteModal: FC<ILeaveModal> = ({
   );
 };
 
-export default memo(DeleteModal);
+export default memo(ButtonModal);
