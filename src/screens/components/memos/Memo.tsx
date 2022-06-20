@@ -1,18 +1,12 @@
-import { memo, useCallback, useMemo } from 'react';
-import {
-  View,
-  StyleProp,
-  ViewStyle,
-  ListRenderItem,
-  Pressable,
-} from 'react-native';
+import { memo, useCallback, useEffect, useMemo } from 'react';
+import { StyleProp, ViewStyle, ListRenderItem, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 import { SafeAreaContainer } from '../../../components/layout';
-import { MainHeader, MemoItem, StyledText } from '../../../components/common';
+import { FavoritChip, MainHeader, MemoItem } from '../../../components/common';
 import { sample } from '../../../api/sampleData';
 import { RoomEntity } from '../../../entity';
 import { MemoScreenNavigationProp } from '../../stacks/MemoStack';
@@ -33,12 +27,19 @@ const ButtonIcon = styled.Image(({ theme }) => ({
   tintColor: theme.color.white,
 }));
 
+const Footer = styled.View({
+  width: '100%',
+  height: 5,
+});
+
 const Memo = () => {
   const theme = useTheme();
 
   const navigation = useNavigation<MemoScreenNavigationProp>();
 
   // const [listData, setListData] = useState(sample);
+
+  useEffect(() => {}, []);
 
   const Row = useMemo<StyleProp<ViewStyle>>(
     () => ({
@@ -201,19 +202,11 @@ const Memo = () => {
   );
 
   const listHeaderComponent = useCallback(() => {
-    return (
-      <View style={{ width: '100%', height: 100, backgroundColor: 'orange' }}>
-        <StyledText>Favarits Div</StyledText>
-      </View>
-    );
+    return <FavoritChip items={sample} />;
   }, []);
 
   const listFooterComponent = useCallback(() => {
-    return (
-      <View style={{ width: '100%', height: 50, backgroundColor: 'blue' }}>
-        <StyledText>푸터</StyledText>
-      </View>
-    );
+    return <Footer />;
   }, []);
 
   return (

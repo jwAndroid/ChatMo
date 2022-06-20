@@ -1,4 +1,4 @@
-import { FC, memo, ReactNode } from 'react';
+import { FC, memo } from 'react';
 import { ImageSourcePropType } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
@@ -57,8 +57,8 @@ const Icon = styled.Image(({ theme }) => ({
 }));
 
 interface IMemoItem {
-  title: ReactNode;
-  lastMemo: ReactNode;
+  title: String;
+  lastMemo: String;
   date: number;
   count: number;
   isLock: boolean;
@@ -86,14 +86,16 @@ const MemoItem: FC<IMemoItem> = ({
       <ContentsContainer>
         <TitleContainer>
           <StyledText color={theme.color.text} fontSize={16} isBlod>
-            {title}
+            {title.length < 15 ? `${title}` : `${title.substring(0, 15)}...`}
           </StyledText>
 
           {isLock && <Icon source={theme.icon.lock} />}
         </TitleContainer>
 
         <StyledText fontSize={12} marginTop={3} color={theme.color.item.text}>
-          {lastMemo}
+          {lastMemo.length < 20
+            ? `${lastMemo}`
+            : `${lastMemo.substring(0, 20)}...`}
         </StyledText>
       </ContentsContainer>
 
