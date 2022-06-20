@@ -1,33 +1,73 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { StatusBar } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { signInAnonymously } from 'firebase/auth';
+import NetInfo from '@react-native-community/netinfo';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
-import { signInAnonymously } from 'firebase/auth';
 
 import { cacheFonts, cacheImages } from '../api/cache';
 import { font, icon } from '../theme';
 import { Navigation } from '../navigation';
 import { auth } from '../api/firebase';
+import { APP_THEME_KEY } from '../api/constants';
+import { TextModal } from '../components/common';
 
-const Container = styled.View(() => ({
+interface ILogoContainer {
+  isWhite: boolean;
+}
+
+const LogoContainer = styled.View<ILogoContainer>(({ theme, isWhite }) => ({
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'gray',
+  padding: 50,
+  backgroundColor: isWhite ? theme.color.white : theme.color.black,
 }));
 
 const Logo = styled.Image({
-  width: 100,
-  height: 100,
+  width: '100%',
+  resizeMode: 'contain',
 });
 
 const Splash = () => {
   const theme = useTheme();
-
   const [appIsReady, setAppIsReady] = useState(false);
+  const [isWhite, setIsWhite] = useState(true);
+  const [cacheReady, setCacheReady] = useState(false);
+  const [isConnected, setIsConnected] = useState<boolean | null>(false);
+
+  const notification = useMemo(() => {
+    return '챗모 앱 서비스를 사용하기 위해,\n네트워크 연결을 확인해주세요.';
+  }, []);
 
   useEffect(() => {
     (async () => {
-      await Promise.all([cacheFonts(font), ...cacheImages(icon)]);
+      await Promise.all([cacheFonts(font), ...cacheImages(icon)]).then(() => {
+        setCacheReady(true);
+      });
+    })();
+  }, []);
+
+  useLayoutEffect(() => {
+    StatusBar.setHidden(true);
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useLayoutEffect(() => {
+    (async () => {
+      const appTheme = await AsyncStorage.getItem(APP_THEME_KEY);
+
+      if (appTheme !== null && appTheme !== undefined) {
+        setIsWhite(appTheme === 'white' ? true : false);
+      }
     })();
   }, []);
 
@@ -35,20 +75,24 @@ const Splash = () => {
     (async () => {
       const { user } = await signInAnonymously(auth);
 
-      if (user.uid !== null && user.uid !== undefined) {
+      if (user.uid !== null && isConnected && cacheReady) {
         setTimeout(() => {
           setAppIsReady(true);
         }, 3000);
       }
     })();
-  }, []);
+  }, [isConnected, cacheReady]);
 
-  return appIsReady ? (
+  return appIsReady && isConnected && cacheReady ? (
     <Navigation />
   ) : (
-    <Container>
-      <Logo source={theme.icon.splashicon} />
-    </Container>
+    <LogoContainer isWhite={isWhite}>
+      <Logo
+        source={isWhite ? theme.icon.splash_black : theme.icon.splash_white}
+      />
+
+      {!isConnected && <TextModal isOpen notification={notification} />}
+    </LogoContainer>
   );
 };
 

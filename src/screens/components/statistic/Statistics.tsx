@@ -1,19 +1,21 @@
 import { memo } from 'react';
-import { Text } from 'react-native';
 import styled from '@emotion/native';
+
+import { SafeAreaContainer } from '../../../components/layout';
+import { MainHeader } from '../../../components/common';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: theme.background,
+  backgroundColor: theme.color.background,
 }));
 
 const Statistics = () => {
   return (
-    <Container>
-      <Text>Statistics Screen</Text>
-    </Container>
+    <SafeAreaContainer>
+      <Container>
+        <MainHeader title="Statistics" />
+      </Container>
+    </SafeAreaContainer>
   );
 };
 

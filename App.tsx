@@ -1,8 +1,9 @@
 import { memo, useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
-import { ThemeProvider } from '@emotion/react';
+import { StatusBar } from 'expo-status-bar';
 import { EventRegister } from 'react-native-event-listeners';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ThemeProvider } from '@emotion/react';
 
 import { lightTheme, darkTheme } from './src/theme';
 import { Splash } from './src/screens';
@@ -13,11 +14,7 @@ const App = () => {
 
   useEffect(() => {
     EventRegister.addEventListener('changeTheme', (data) => {
-      if (data) {
-        setTheme(lightTheme);
-      } else {
-        setTheme(darkTheme);
-      }
+      setTheme(data ? lightTheme : darkTheme);
     });
 
     return () => {
@@ -29,20 +26,20 @@ const App = () => {
     (async () => {
       const appTheme = await AsyncStorage.getItem(APP_THEME_KEY);
 
-      if (appTheme === 'white') {
-        setTheme(lightTheme);
-      } else {
-        setTheme(darkTheme);
+      if (appTheme !== null && appTheme !== undefined) {
+        setTheme(appTheme === 'white' ? lightTheme : darkTheme);
       }
     })();
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <StatusBar barStyle="default" />
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
+        <StatusBar style="auto" />
 
-      <Splash />
-    </ThemeProvider>
+        <Splash />
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 };
 

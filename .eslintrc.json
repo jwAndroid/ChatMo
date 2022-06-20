@@ -35,10 +35,12 @@
     "comma-dangle": "off",
     "no-console": "off",
     "object-curly-newline": "off",
-    "no-promise-executor-return": "off",
-    "consistent-return": "off",
     "react/require-default-props": "off",
     "no-shadow": "off",
-    "no-unneeded-ternary": "off"
+    "no-unneeded-ternary": "off",
+    "react/no-unstable-nested-components": "off",
+    "react/style-prop-object": "off",
+    "operator-linebreak": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
