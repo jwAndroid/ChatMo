@@ -53,6 +53,11 @@ export const lightTheme: Theme = {
     gray_900: '#19191A',
     gray_950: '#141414',
     gray_1000: '#0A0A0A',
+    red_error: '#EB4250',
+    sky_100: '#97c4f8',
+    sky_200: '#85bbf7',
+    sky_300: '#74b1f6',
+    sky_400: '#529EF4',
     tab: {
       background: '#F2F3F5',
     },
@@ -91,6 +96,11 @@ export const darkTheme: Theme = {
     gray_900: '#19191A',
     gray_950: '#141414',
     gray_1000: '#0A0A0A',
+    red_error: '#EB4250',
+    sky_100: '#97c4f8',
+    sky_200: '#85bbf7',
+    sky_300: '#74b1f6',
+    sky_400: '#529EF4',
     tab: {
       background: '#0A0A0A',
     },
