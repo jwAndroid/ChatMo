@@ -9,7 +9,8 @@ export interface RoomEntity {
   isFavorites: boolean;
   isCompleate: boolean;
   isPin: boolean;
-  isMemoLook: boolean;
+  isLook: boolean;
+  password: number;
   status: number;
   createdAt: number;
   updatedAt: number;

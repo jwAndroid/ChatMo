@@ -1,8 +1,6 @@
 import { memo, useCallback, useMemo } from 'react';
 import {
-  TouchableOpacity,
   View,
-  Text,
   StyleProp,
   ViewStyle,
   ListRenderItem,
@@ -14,7 +12,7 @@ import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 import { SafeAreaContainer } from '../../../components/layout';
-import { MainHeader, StyledText } from '../../../components/common';
+import { MainHeader, MemoItem, StyledText } from '../../../components/common';
 import { sample } from '../../../api/sampleData';
 import { RoomEntity } from '../../../entity';
 import { MemoScreenNavigationProp } from '../../stacks/MemoStack';
@@ -29,10 +27,10 @@ const RowBack = styled.View({
   flexDirection: 'row',
 });
 
-const ButtonIcon = styled.Image(() => ({
+const ButtonIcon = styled.Image(({ theme }) => ({
   width: 17,
   height: 17,
-  // tintColor: theme.color.white,
+  tintColor: theme.color.white,
 }));
 
 const Memo = () => {
@@ -47,12 +45,12 @@ const Memo = () => {
       height: 60,
       justifyContent: 'center',
       paddingVertical: 8,
-      backgroundColor: theme.color.gray_300,
+      backgroundColor: theme.color.header.background,
     }),
     [theme]
   );
 
-  const FavoritesButton = useMemo<StyleProp<ViewStyle>>(
+  const EditButton = useMemo<StyleProp<ViewStyle>>(
     () => ({
       position: 'absolute',
       bottom: 0,
@@ -61,12 +59,12 @@ const Memo = () => {
       left: 0,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme.color.gray_20,
+      backgroundColor: theme.color.sky_100,
     }),
     [theme]
   );
 
-  const AlramButton = useMemo<StyleProp<ViewStyle>>(
+  const FavoritButton = useMemo<StyleProp<ViewStyle>>(
     () => ({
       position: 'absolute',
       bottom: 0,
@@ -75,12 +73,12 @@ const Memo = () => {
       left: 75,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme.color.gray_20,
+      backgroundColor: theme.color.sky_200,
     }),
     [theme]
   );
 
-  const PinButton = useMemo<StyleProp<ViewStyle>>(
+  const LockButton = useMemo<StyleProp<ViewStyle>>(
     () => ({
       position: 'absolute',
       bottom: 0,
@@ -89,26 +87,12 @@ const Memo = () => {
       left: 150,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme.color.gray_20,
+      backgroundColor: theme.color.sky_300,
     }),
     [theme]
   );
 
-  const ReadButton = useMemo<StyleProp<ViewStyle>>(
-    () => ({
-      position: 'absolute',
-      bottom: 0,
-      top: 0,
-      width: 75,
-      right: 75,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: theme.color.gray_20,
-    }),
-    [theme]
-  );
-
-  const LeaveButton = useMemo<StyleProp<ViewStyle>>(
+  const DeleteButton = useMemo<StyleProp<ViewStyle>>(
     () => ({
       position: 'absolute',
       bottom: 0,
@@ -117,14 +101,14 @@ const Memo = () => {
       right: 0,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: theme.color.gray_20,
+      backgroundColor: theme.color.red_error,
     }),
     [theme]
   );
 
   const keyExtractor = useCallback((item: RoomEntity) => `${item.roomId}`, []);
 
-  const onFavorits = useCallback(
+  const onEdit = useCallback(
     (rowMap, item) => () => {
       console.log(rowMap);
       console.log(item);
@@ -132,7 +116,7 @@ const Memo = () => {
     []
   );
 
-  const onAlram = useCallback(
+  const onFavorit = useCallback(
     (rowMap, item) => () => {
       console.log(rowMap);
       console.log(item);
@@ -140,7 +124,7 @@ const Memo = () => {
     []
   );
 
-  const onPin = useCallback(
+  const onLock = useCallback(
     (rowMap, item) => () => {
       console.log(rowMap);
       console.log(item);
@@ -148,15 +132,7 @@ const Memo = () => {
     []
   );
 
-  const onReadMessage = useCallback(
-    (rowMap, item) => () => {
-      console.log(rowMap);
-      console.log(item);
-    },
-    []
-  );
-
-  const onLeave = useCallback(
+  const onDelete = useCallback(
     (rowMap, item) => () => {
       console.log(rowMap);
       console.log(item);
@@ -175,61 +151,33 @@ const Memo = () => {
     ({ item }, rowMap) => {
       return (
         <RowBack>
-          <TouchableOpacity
-            style={FavoritesButton}
-            onPress={onFavorits(rowMap, item)}
-          >
-            <ButtonIcon
-              source={
-                item.isFavorites ? theme.icon.list_black : theme.icon.list_black
-              }
-            />
-          </TouchableOpacity>
+          <Pressable style={EditButton} onPress={onEdit(rowMap, item)}>
+            <ButtonIcon source={theme.icon.edit} />
+          </Pressable>
 
-          <TouchableOpacity style={AlramButton} onPress={onAlram(rowMap, item)}>
-            <ButtonIcon
-              source={
-                item.isAlram ? theme.icon.list_black : theme.icon.list_black
-              }
-            />
-          </TouchableOpacity>
+          <Pressable style={FavoritButton} onPress={onFavorit(rowMap, item)}>
+            <ButtonIcon source={theme.icon.favorites} />
+          </Pressable>
 
-          <TouchableOpacity style={PinButton} onPress={onPin(rowMap, item)}>
-            <ButtonIcon
-              source={
-                item.isPin ? theme.icon.list_black : theme.icon.list_black
-              }
-            />
-          </TouchableOpacity>
+          <Pressable style={LockButton} onPress={onLock(rowMap, item)}>
+            <ButtonIcon source={theme.icon.lock} />
+          </Pressable>
 
-          <TouchableOpacity
-            style={ReadButton}
-            onPress={onReadMessage(rowMap, item)}
-          >
-            <StyledText fontSize={13} color={theme.color.black} isBlod>
-              읽음
-            </StyledText>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={LeaveButton} onPress={onLeave(rowMap, item)}>
-            <StyledText fontSize={13} color={theme.color.black} isBlod>
-              나가기
-            </StyledText>
-          </TouchableOpacity>
+          <Pressable style={DeleteButton} onPress={onDelete(rowMap, item)}>
+            <ButtonIcon source={theme.icon.delete} />
+          </Pressable>
         </RowBack>
       );
     },
     [
-      FavoritesButton,
-      AlramButton,
-      PinButton,
-      LeaveButton,
-      ReadButton,
-      onFavorits,
-      onAlram,
-      onPin,
-      onLeave,
-      onReadMessage,
+      EditButton,
+      FavoritButton,
+      LockButton,
+      DeleteButton,
+      onEdit,
+      onFavorit,
+      onLock,
+      onDelete,
       theme,
     ]
   );
@@ -238,27 +186,32 @@ const Memo = () => {
     ({ item }) => {
       return (
         <Pressable onPress={onPressItem(item)} style={Row}>
-          <View>
-            <Text>{item.title}</Text>
-          </View>
+          <MemoItem
+            title={item.title}
+            lastMemo={item.lastMemo}
+            date={item.createdAt}
+            count={item.memoCount}
+            isLock
+            image={theme.icon.delete}
+          />
         </Pressable>
       );
     },
-    [Row, onPressItem]
+    [Row, onPressItem, theme.icon.delete]
   );
 
   const listHeaderComponent = useCallback(() => {
     return (
-      <View style={{ width: '100%', height: 50, backgroundColor: 'red' }}>
-        <Text>헤더</Text>
+      <View style={{ width: '100%', height: 100, backgroundColor: 'orange' }}>
+        <StyledText>Favarits Div</StyledText>
       </View>
     );
   }, []);
 
   const listFooterComponent = useCallback(() => {
     return (
-      <View style={{ width: '100%', height: 20, backgroundColor: 'blue' }}>
-        <Text>푸터</Text>
+      <View style={{ width: '100%', height: 50, backgroundColor: 'blue' }}>
+        <StyledText>푸터</StyledText>
       </View>
     );
   }, []);
@@ -277,9 +230,9 @@ const Memo = () => {
           ListHeaderComponent={listHeaderComponent}
           ListFooterComponent={listFooterComponent}
           leftOpenValue={225}
-          stopLeftSwipe={225}
-          stopRightSwipe={-150}
-          rightOpenValue={-150}
+          stopLeftSwipe={150}
+          stopRightSwipe={-75}
+          rightOpenValue={-75}
           previewOpenDelay={3000}
         />
       </Container>
