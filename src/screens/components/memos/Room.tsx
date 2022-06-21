@@ -1,20 +1,22 @@
 import { memo, ReactNode, useCallback, useEffect, useState } from 'react';
+import { useTheme } from '@emotion/react';
+import styled from '@emotion/native';
 import {
   GiftedChat,
   IMessage,
   Bubble,
   BubbleProps,
+  DayProps,
 } from 'react-native-gifted-chat';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { getAuth } from 'firebase/auth';
-import styled from '@emotion/native';
 
 import {
   MemoScreenNavigationProp,
   MemoScreenRouteProp,
 } from '../../stacks/MemoStack';
 import { RoomEntity } from '../../../entity';
-import { IconHeader } from '../../../components/common';
+import { DayHeader, IconHeader } from '../../../components/common';
 import { SafeAreaContainer } from '../../../components/layout';
 
 const Container = styled.View(() => ({
@@ -23,6 +25,8 @@ const Container = styled.View(() => ({
 }));
 
 const Room = () => {
+  const theme = useTheme();
+
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [entity, setEntity] = useState<RoomEntity>();
   const [uid, setUid] = useState('');
@@ -38,8 +42,7 @@ const Room = () => {
   }, [params, entity]);
 
   useEffect(() => {
-    const auth = getAuth();
-    const user = auth.currentUser;
+    const user = getAuth().currentUser;
 
     if (user) {
       setUid(user.uid);
@@ -77,18 +80,35 @@ const Room = () => {
       return (
         <Bubble
           {...props}
+          containerStyle={{
+            right: {
+              marginTop: 5,
+            },
+          }}
           wrapperStyle={{
             right: {
+              borderTopRightRadius: 3,
               backgroundColor: '#6646ee',
             },
           }}
           textStyle={{
             right: {
               color: '#fff',
+              fontSize: 13,
+              fontFamily: theme.font.YoonGothicRegular,
             },
           }}
         />
       );
+    },
+    [theme]
+  );
+
+  const renderDay = useCallback(
+    (
+      props: Readonly<DayProps<IMessage>> & Readonly<{ children?: ReactNode }>
+    ) => {
+      return <DayHeader props={props} />;
     },
     []
   );
@@ -103,8 +123,9 @@ const Room = () => {
           messages={messages}
           renderBubble={renderBubble}
           keyboardShouldPersistTaps="handled"
+          renderDay={renderDay}
           onSend={(messages) => onSend(messages)}
-          user={{ _id: uid, name: 'user' }}
+          user={{ _id: uid }}
         />
       </Container>
     </SafeAreaContainer>

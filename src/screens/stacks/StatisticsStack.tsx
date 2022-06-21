@@ -8,9 +8,12 @@ import {
 import { useTheme } from '@emotion/react';
 
 import { Statistics } from '../components/statistic';
+import { RoomEntity } from '../../entity';
+import { Room } from '../components/memos';
 
 type RootStackParamList = {
   Statistics: undefined;
+  Room: RoomEntity | undefined;
 };
 
 export type StatisticsScreenRouteProp = RouteProp<
@@ -20,6 +23,12 @@ export type StatisticsScreenRouteProp = RouteProp<
 export type StatisticsScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Statistics'
+>;
+
+export type RoomScreenRouteProp = RouteProp<RootStackParamList, 'Room'>;
+export type RoomScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Room'
 >;
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
@@ -38,6 +47,8 @@ const StatisticsStack = () => {
   return (
     <Navigator screenOptions={screenOptions}>
       <Screen name="Statistics" component={Statistics} />
+
+      <Screen name="Room" component={Room} />
     </Navigator>
   );
 };

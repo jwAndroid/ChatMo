@@ -1,4 +1,5 @@
 export { default as ButtonModal } from './ButtonModal';
+export { default as DayHeader } from './DayHeader';
 export { default as Divider } from './Divider';
 export { default as FavoritChip } from './FavoritChip';
 export { default as FloatingButton } from './FloatingButton';
