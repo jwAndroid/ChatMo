@@ -14,6 +14,7 @@ import { useTheme } from '@emotion/react';
 import { SafeAreaContainer } from '../../../components/layout';
 import {
   FavoritChip,
+  FloatingButton,
   MainHeader,
   MemoItem,
   StyledText,
@@ -172,6 +173,8 @@ const Memo = () => {
     []
   );
 
+  const onPressFloatingButton = useCallback(() => {}, []);
+
   const renderHiddenItem = useCallback(
     ({ item }, rowMap) => {
       return (
@@ -278,6 +281,11 @@ const Memo = () => {
           stopRightSwipe={-75}
           rightOpenValue={-75}
           previewOpenDelay={3000}
+        />
+
+        <FloatingButton
+          source={theme.icon.edit}
+          onPress={onPressFloatingButton}
         />
       </Container>
     </SafeAreaContainer>
