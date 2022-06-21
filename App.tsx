@@ -42,7 +42,7 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
-        <StatusBar style="auto" />
+        <StatusBar style={theme.name === 'lightTheme' ? 'dark' : 'light'} />
 
         <Splash />
       </ThemeProvider>

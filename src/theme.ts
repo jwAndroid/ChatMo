@@ -27,7 +27,7 @@ export const icon = {
 };
 
 export const lightTheme: Theme = {
-  themeName: 'lightTheme',
+  name: 'lightTheme',
   font: {
     YoonGothicRegular: 'YoonGothicRegular',
     YoonGothicBold: 'YoonGothicBold',
@@ -76,7 +76,7 @@ export const lightTheme: Theme = {
 };
 
 export const darkTheme: Theme = {
-  themeName: 'darkTheme',
+  name: 'darkTheme',
   font: {
     YoonGothicRegular: 'YoonGothicRegular',
     YoonGothicBold: 'YoonGothicBold',

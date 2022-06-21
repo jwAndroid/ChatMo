@@ -1,4 +1,4 @@
-import { memo, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { memo, useMemo } from 'react';
 import { Image } from 'react-native';
 import {
   BottomTabNavigationOptions,
@@ -6,12 +6,9 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { EventRegister } from 'react-native-event-listeners';
 import { useTheme } from '@emotion/react';
 
 import { MemosStack, StatisticsStack, SettingStack } from '../screens/stacks';
-import { APP_THEME_KEY } from '../api/constants';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -19,26 +16,6 @@ const BottmTab = () => {
   const insets = useSafeAreaInsets();
 
   const theme = useTheme();
-
-  const [isWhite, setIsWhite] = useState(true);
-
-  useLayoutEffect(() => {
-    (async () => {
-      const storage = await AsyncStorage.getItem(APP_THEME_KEY);
-
-      setIsWhite(storage === 'dark' ? false : true);
-    })();
-  }, []);
-
-  useEffect(() => {
-    EventRegister.addEventListener('changeTheme', (data) => {
-      setIsWhite(data);
-    });
-
-    return () => {
-      EventRegister.removeEventListener('changeTheme');
-    };
-  }, []);
 
   const screenOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
@@ -77,7 +54,9 @@ const BottmTab = () => {
               return (
                 <Image
                   source={
-                    isWhite ? theme.icon.list_black : theme.icon.list_white
+                    theme.name === 'lightTheme'
+                      ? theme.icon.list_black
+                      : theme.icon.list_white
                   }
                   style={{ width: 22, height: 22 }}
                 />
@@ -103,7 +82,7 @@ const BottmTab = () => {
               return (
                 <Image
                   source={
-                    isWhite
+                    theme.name === 'lightTheme'
                       ? theme.icon.statistic_black
                       : theme.icon.statistic_white
                   }
@@ -131,7 +110,7 @@ const BottmTab = () => {
               return (
                 <Image
                   source={
-                    isWhite
+                    theme.name === 'lightTheme'
                       ? theme.icon.settings_black
                       : theme.icon.settings_white
                   }

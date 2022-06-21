@@ -35,8 +35,6 @@ const Room = () => {
     if (params) {
       setEntity(params);
     }
-
-    console.log(entity);
   }, [params, entity]);
 
   useEffect(() => {
@@ -65,8 +63,6 @@ const Room = () => {
   const onSend = useCallback((messages = []) => {
     // 쓸 데이터
     setMessages((prev) => GiftedChat.append(prev, messages));
-
-    console.log(messages);
   }, []);
 
   const onBackPress = useCallback(() => {
