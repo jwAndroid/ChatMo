@@ -64,7 +64,7 @@ const IconHeader: FC<IIconHeader> = ({
           <TouchableWithoutFeedback onPress={onBackPress}>
             <Icon
               source={
-                theme.themeName === 'lightTheme'
+                theme.name === 'lightTheme'
                   ? theme.icon.back_arrow_black
                   : theme.icon.back_arrow_white
               }

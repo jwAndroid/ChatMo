@@ -8,7 +8,7 @@ declare module '*.jpeg';
 
 declare module '@emotion/react' {
   export interface Theme {
-    themeName: string;
+    name: string;
     font: {
       YoonGothicRegular: string;
       YoonGothicBold: string;

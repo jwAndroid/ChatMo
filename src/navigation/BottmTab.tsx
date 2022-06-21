@@ -54,7 +54,7 @@ const BottmTab = () => {
               return (
                 <Image
                   source={
-                    theme.themeName === 'lightTheme'
+                    theme.name === 'lightTheme'
                       ? theme.icon.list_black
                       : theme.icon.list_white
                   }
@@ -82,7 +82,7 @@ const BottmTab = () => {
               return (
                 <Image
                   source={
-                    theme.themeName === 'lightTheme'
+                    theme.name === 'lightTheme'
                       ? theme.icon.statistic_black
                       : theme.icon.statistic_white
                   }
@@ -110,7 +110,7 @@ const BottmTab = () => {
               return (
                 <Image
                   source={
-                    theme.themeName === 'lightTheme'
+                    theme.name === 'lightTheme'
                       ? theme.icon.settings_black
                       : theme.icon.settings_white
                   }
