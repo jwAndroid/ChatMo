@@ -282,3 +282,16 @@ export const sample = [
     lastUpdateOn: 156160,
   },
 ];
+
+export const chipData = [
+  { id: 1, title: 'title1asefasefsaef', date: '07-07' },
+  { id: 2, title: 't', date: '07-08' },
+  { id: 3, title: 'title3', date: '07-08' },
+  { id: 4, title: 'title4', date: '07-08' },
+  { id: 5, title: 'title5', date: '07-08' },
+  { id: 6, title: 'title6', date: '07-08' },
+  { id: 7, title: 'title7', date: '07-08' },
+  { id: 8, title: 'title8', date: '07-08' },
+  { id: 9, title: 'title9', date: '07-08' },
+  { id: 10, title: 'title10', date: '07-08' },
+];
