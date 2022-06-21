@@ -49,6 +49,7 @@ declare module '@emotion/react' {
       };
       item: {
         text: string;
+        border: string;
       };
     };
     icon: typeof icon;

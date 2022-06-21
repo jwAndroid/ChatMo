@@ -8,6 +8,7 @@ export const font = {
 export const icon = {
   back_arrow_black: require('../assets/icons/back_arrow_black.png'),
   back_arrow_white: require('../assets/icons/back_arrow_white.png'),
+  circle_x: require('../assets/icons/circle_x.png'),
   delete: require('../assets/icons/delete.png'),
   edit: require('../assets/icons/edit.png'),
   favorites: require('../assets/icons/favorites.png'),
@@ -67,6 +68,7 @@ export const lightTheme: Theme = {
     },
     item: {
       text: '#71757E',
+      border: '#AAAEB3',
     },
   },
   icon,
@@ -114,6 +116,7 @@ export const darkTheme: Theme = {
     },
     item: {
       text: '#E1E3E6',
+      border: '#E1E3E6',
     },
   },
   icon,

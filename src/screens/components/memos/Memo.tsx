@@ -1,12 +1,23 @@
 import { memo, useCallback, useEffect, useMemo } from 'react';
-import { StyleProp, ViewStyle, ListRenderItem, Pressable } from 'react-native';
+import {
+  StyleProp,
+  ViewStyle,
+  ListRenderItem,
+  Pressable,
+  View,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 import { SafeAreaContainer } from '../../../components/layout';
-import { FavoritChip, MainHeader, MemoItem } from '../../../components/common';
+import {
+  FavoritChip,
+  MainHeader,
+  MemoItem,
+  StyledText,
+} from '../../../components/common';
 import { sample } from '../../../api/sampleData';
 import { RoomEntity } from '../../../entity';
 import { MemoScreenNavigationProp } from '../../stacks/MemoStack';
@@ -45,7 +56,6 @@ const Memo = () => {
     () => ({
       height: 60,
       justifyContent: 'center',
-      paddingVertical: 8,
       backgroundColor: theme.color.header.background,
     }),
     [theme]
@@ -202,8 +212,22 @@ const Memo = () => {
   );
 
   const listHeaderComponent = useCallback(() => {
-    return <FavoritChip />;
-  }, []);
+    return (
+      <View>
+        <FavoritChip />
+
+        <StyledText
+          isBlod
+          color={theme.color.text}
+          fontSize={15}
+          marginTop={10}
+          marginLeft={10}
+        >
+          목록
+        </StyledText>
+      </View>
+    );
+  }, [theme.color.text]);
 
   const listFooterComponent = useCallback(() => {
     return <Footer />;
@@ -213,6 +237,17 @@ const Memo = () => {
     <SafeAreaContainer>
       <Container>
         <MainHeader title="List" />
+
+        <StyledText
+          isBlod
+          color={theme.color.text}
+          fontSize={15}
+          marginTop={15}
+          marginLeft={10}
+          marginBottom={5}
+        >
+          즐겨찾기
+        </StyledText>
 
         <SwipeListView
           data={sample}

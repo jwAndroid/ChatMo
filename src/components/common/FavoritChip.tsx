@@ -1,29 +1,40 @@
 import { FC, memo, useCallback } from 'react';
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 import { chipData } from '../../api/sampleData';
+import StyledText from './StyledText';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
   flexDirection: 'row',
-  paddingHorizontal: 8,
+  paddingHorizontal: 5,
+  marginHorizontal: 5,
+  marginVertical: 5,
   backgroundColor: theme.color.background,
 }));
 
-const ContentsContainer = styled.View(() => ({
+const ContentsContainer = styled.View(({ theme }) => ({
   flex: 1,
   justifyContent: 'center',
+  paddingVertical: 5,
+  paddingHorizontal: 15,
   alignItems: 'center',
-  backgroundColor: 'gray',
+  borderTopLeftRadius: 8,
+  borderBottomLeftRadius: 8,
+  borderWidth: 1,
+  borderColor: theme.color.item.border,
 }));
 
-const DeleteContainer = styled.Pressable(() => ({
-  width: 30,
+const DeleteContainer = styled.Pressable(({ theme }) => ({
+  width: 26,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'blue',
+  marginLeft: -1,
+  borderTopRightRadius: 8,
+  borderBottomRightRadius: 8,
+  backgroundColor: theme.color.sky_400,
 }));
 
 const DeleteIcon = styled.Image(() => ({
@@ -46,15 +57,15 @@ const FavoritChip: FC<IFavoritChip> = () => {
       return (
         <Container>
           <ContentsContainer>
-            <Text>
+            <StyledText color={theme.color.text} fontSize={15} isBlod>
               {String(item.title).length < 15
-                ? String(item.title)
+                ? `${String(item.title)}`
                 : `${String(item.title).substring(0, 15)}...`}
-            </Text>
+            </StyledText>
           </ContentsContainer>
 
           <DeleteContainer>
-            <DeleteIcon source={theme.icon.delete} />
+            <DeleteIcon source={theme.icon.circle_x} />
           </DeleteContainer>
         </Container>
       );
