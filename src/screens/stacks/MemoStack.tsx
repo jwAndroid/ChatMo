@@ -32,6 +32,7 @@ const MemoStack = () => {
   const screenOptions = useMemo<StackNavigationOptions>(
     () => ({
       headerShown: false,
+      cardStyle: { backgroundColor: '#fff' },
     }),
     []
   );

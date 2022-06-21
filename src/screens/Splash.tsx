@@ -41,6 +41,14 @@ const Splash = () => {
     return '챗모 앱 서비스를 사용하기 위해,\n네트워크 연결을 확인해주세요.';
   }, []);
 
+  useLayoutEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   useEffect(() => {
     (async () => {
       await Promise.all([cacheFonts(font), ...cacheImages(icon)]).then(() => {
@@ -51,14 +59,6 @@ const Splash = () => {
 
   useLayoutEffect(() => {
     StatusBar.setHidden(true);
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      setIsConnected(state.isConnected);
-    });
-
-    return () => unsubscribe();
   }, []);
 
   useLayoutEffect(() => {

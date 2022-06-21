@@ -47,7 +47,6 @@ const BottmTab = () => {
       tabBarStyle: {
         height: 50 + insets.bottom / 2,
         borderTopWidth: 0,
-        backgroundColor: theme.color.tab.background,
       },
       tabBarIconStyle: { flex: 0 },
       tabBarItemStyle: {
@@ -73,7 +72,6 @@ const BottmTab = () => {
               display: routeName === 'Memo' ? 'flex' : 'none',
               height: 50 + insets.bottom / 2,
               borderTopWidth: 0,
-              backgroundColor: theme.color.tab.background,
             },
             tabBarIcon: () => {
               return (
@@ -100,7 +98,6 @@ const BottmTab = () => {
               display: routeName === 'Statistics' ? 'flex' : 'none',
               height: 50 + insets.bottom / 2,
               borderTopWidth: 0,
-              backgroundColor: theme.color.tab.background,
             },
             tabBarIcon: () => {
               return (
@@ -129,7 +126,6 @@ const BottmTab = () => {
               display: routeName === 'Setting' ? 'flex' : 'none',
               height: 50 + insets.bottom / 2,
               borderTopWidth: 0,
-              backgroundColor: theme.color.tab.background,
             },
             tabBarIcon: () => {
               return (
