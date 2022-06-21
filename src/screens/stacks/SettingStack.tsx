@@ -5,6 +5,7 @@ import {
   StackNavigationOptions,
   StackNavigationProp,
 } from '@react-navigation/stack';
+import { useTheme } from '@emotion/react';
 
 import { Setting, ThemeStyle } from '../components/settings';
 
@@ -31,12 +32,14 @@ export type ThemeStyleScreenNavigationProp = StackNavigationProp<
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
 const SettingStack = () => {
+  const theme = useTheme();
+
   const screenOptions = useMemo<StackNavigationOptions>(
     () => ({
       headerShown: false,
-      cardStyle: { backgroundColor: '#fff' },
+      cardStyle: { backgroundColor: theme.color.header.background },
     }),
-    []
+    [theme.color.header.background]
   );
 
   return (

@@ -13,6 +13,8 @@ import { APP_THEME_KEY } from './src/api/constants';
 const App = () => {
   const [theme, setTheme] = useState(lightTheme);
 
+  console.log(theme.themeName);
+
   useEffect(() => {
     EventRegister.addEventListener('changeTheme', (data) => {
       setTheme(data ? lightTheme : darkTheme);
@@ -42,7 +44,9 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
-        <StatusBar style="auto" />
+        <StatusBar
+          style={theme.themeName === 'lightTheme' ? 'dark' : 'light'}
+        />
 
         <Splash />
       </ThemeProvider>
