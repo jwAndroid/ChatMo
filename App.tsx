@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import * as SystemUI from 'expo-system-ui';
 import { EventRegister } from 'react-native-event-listeners';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,6 +22,12 @@ const App = () => {
       EventRegister.removeEventListener('changeTheme');
     };
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      await SystemUI.setBackgroundColorAsync(theme.color.tab.background);
+    })();
+  }, [theme.color.tab.background]);
 
   useEffect(() => {
     (async () => {
