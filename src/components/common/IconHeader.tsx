@@ -1,12 +1,8 @@
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FC, memo, ReactNode, useEffect, useState } from 'react';
+import { FC, memo, ReactNode } from 'react';
 import { ImageSourcePropType } from 'react-native';
-import { EventRegister } from 'react-native-event-listeners';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-
-import { APP_THEME_KEY } from '../../api/constants';
 
 import StyledText from './StyledText';
 
@@ -61,28 +57,6 @@ const IconHeader: FC<IIconHeader> = ({
 }) => {
   const theme = useTheme();
 
-  const [isWhite, setIsWhite] = useState(true);
-
-  useEffect(() => {
-    EventRegister.addEventListener('changeTheme', (data) => {
-      setIsWhite(data);
-    });
-
-    return () => {
-      EventRegister.removeEventListener('changeTheme');
-    };
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const appTheme = await AsyncStorage.getItem(APP_THEME_KEY);
-
-      if (appTheme !== null && appTheme !== undefined) {
-        setIsWhite(appTheme === 'white' ? true : false);
-      }
-    })();
-  }, []);
-
   return (
     <HeaderContainer>
       <LeftContainer>
@@ -90,7 +64,7 @@ const IconHeader: FC<IIconHeader> = ({
           <TouchableWithoutFeedback onPress={onBackPress}>
             <Icon
               source={
-                isWhite
+                theme.themeName === 'lightTheme'
                   ? theme.icon.back_arrow_black
                   : theme.icon.back_arrow_white
               }
