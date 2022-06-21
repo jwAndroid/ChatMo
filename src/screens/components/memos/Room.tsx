@@ -7,9 +7,12 @@ import {
   Bubble,
   BubbleProps,
   DayProps,
+  MessageTextProps,
 } from 'react-native-gifted-chat';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { getAuth } from 'firebase/auth';
+import { LinkPreview } from '@flyerhq/react-native-link-preview';
+import { Text, View } from 'react-native';
 
 import {
   MemoScreenNavigationProp,
@@ -113,6 +116,43 @@ const Room = () => {
     []
   );
 
+  const renderText = useCallback((text: string) => {
+    console.log(`renderText ${text}`);
+
+    return <Text>{text}</Text>;
+  }, []);
+
+  const renderTitle = useCallback((title: string) => {
+    console.log(`renderTitle ${title}`);
+
+    return <Text>{title}</Text>;
+  }, []);
+
+  const renderMessageText = useCallback(
+    (
+      messageText: MessageTextProps<IMessage> &
+        Readonly<{ children?: ReactNode }>
+    ) => {
+      const message = messageText.currentMessage!!.text;
+
+      return (
+        <View>
+          {String(message).includes('https') ? (
+            <LinkPreview
+              text={message}
+              renderText={renderText}
+              enableAnimation
+              renderTitle={renderTitle}
+            />
+          ) : (
+            <Text>{message}</Text>
+          )}
+        </View>
+      );
+    },
+    [renderText, renderTitle]
+  );
+
   return (
     <SafeAreaContainer>
       <Container>
@@ -122,6 +162,7 @@ const Room = () => {
           alignTop
           messages={messages}
           renderBubble={renderBubble}
+          renderMessageText={renderMessageText}
           keyboardShouldPersistTaps="handled"
           renderDay={renderDay}
           onSend={(messages) => onSend(messages)}
