@@ -22,7 +22,7 @@ const ShadowContainer = styled.View(({ theme }) => {
       shadowColor: '#000000',
       shadowOffset: {
         width: 0,
-        height: 2,
+        height: 1,
       },
       shadowOpacity: 0.2,
       shadowRadius: 1,
@@ -34,7 +34,7 @@ const ShadowContainer = styled.View(({ theme }) => {
 
   return {
     ...shadow,
-    zIndex: 1,
+    zIndex: 2,
     width: '100%',
     backgroundColor: theme.color.background,
   };
@@ -50,7 +50,7 @@ const StackHeader: FC<IHeader> = ({ title }) => {
   return (
     <ShadowContainer>
       <HeaderContainer>
-        <StyledText color={theme.color.text} isBlod>
+        <StyledText fontSize={20} color={theme.color.text} isBlod>
           {title}
         </StyledText>
       </HeaderContainer>

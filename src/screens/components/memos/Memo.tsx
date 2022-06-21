@@ -236,7 +236,6 @@ const Memo = () => {
         />
 
         <StyledText
-          isBlod
           color={theme.color.text}
           fontSize={15}
           marginTop={10}
@@ -246,7 +245,7 @@ const Memo = () => {
         </StyledText>
       </View>
     );
-  }, [theme.color.text, onPressChipContents, onPressChipDelete]);
+  }, [onPressChipContents, onPressChipDelete, theme.color.text]);
 
   const listFooterComponent = useCallback(() => {
     return <Footer />;
@@ -256,17 +255,6 @@ const Memo = () => {
     <SafeAreaContainer>
       <Container>
         <MainHeader title="List" />
-
-        <StyledText
-          isBlod
-          color={theme.color.text}
-          fontSize={15}
-          marginTop={15}
-          marginLeft={10}
-          marginBottom={5}
-        >
-          즐겨찾기
-        </StyledText>
 
         <SwipeListView
           data={sample}

@@ -1,5 +1,5 @@
 import { FC, memo, useCallback } from 'react';
-import { FlatList, GestureResponderEvent, Pressable } from 'react-native';
+import { FlatList, GestureResponderEvent, Pressable, View } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
@@ -86,13 +86,25 @@ const FavoritChip: FC<IFavoritChip> = ({
   );
 
   return (
-    <FlatList
-      data={chipData}
-      renderItem={renderItem}
-      keyExtractor={keyExtractor}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-    />
+    <View>
+      <StyledText
+        color={theme.color.text}
+        fontSize={15}
+        marginTop={20}
+        marginLeft={10}
+        marginBottom={10}
+      >
+        즐겨찾기
+      </StyledText>
+
+      <FlatList
+        data={chipData}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
+    </View>
   );
 };
 
