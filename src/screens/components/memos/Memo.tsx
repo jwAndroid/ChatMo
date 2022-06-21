@@ -160,8 +160,6 @@ const Memo = () => {
 
   const onPressChipContents = useCallback(
     (item) => () => {
-      console.log('onPressChipContents');
-
       console.log(item);
     },
     []
@@ -169,8 +167,6 @@ const Memo = () => {
 
   const onPressChipDelete = useCallback(
     (item) => () => {
-      console.log('onPressChipDelete');
-
       console.log(item);
     },
     []
