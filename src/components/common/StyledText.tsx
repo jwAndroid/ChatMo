@@ -1,5 +1,6 @@
 import { FC, memo, ReactNode } from 'react';
 import styled from '@emotion/native';
+import { GestureResponderEvent } from 'react-native';
 
 interface IEmotionText {
   fontSize?: number;
@@ -43,6 +44,7 @@ interface IStyledText {
   marginRight?: number;
   marginTop?: number;
   marginBottom?: number;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 const StyledText: FC<IStyledText> = ({
@@ -54,6 +56,7 @@ const StyledText: FC<IStyledText> = ({
   marginRight,
   marginTop,
   marginBottom,
+  onPress,
 }) => {
   return (
     <EmotionText
@@ -64,6 +67,7 @@ const StyledText: FC<IStyledText> = ({
       marginRight={marginRight}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      onPress={onPress}
     >
       {children}
     </EmotionText>

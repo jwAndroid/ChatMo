@@ -158,6 +158,24 @@ const Memo = () => {
     [navigation]
   );
 
+  const onPressChipContents = useCallback(
+    (item) => () => {
+      console.log('onPressChipContents');
+
+      console.log(item);
+    },
+    []
+  );
+
+  const onPressChipDelete = useCallback(
+    (item) => () => {
+      console.log('onPressChipDelete');
+
+      console.log(item);
+    },
+    []
+  );
+
   const renderHiddenItem = useCallback(
     ({ item }, rowMap) => {
       return (
@@ -203,18 +221,20 @@ const Memo = () => {
             date={item.createdAt}
             count={item.memoCount}
             isLock
-            image={theme.icon.delete}
           />
         </Pressable>
       );
     },
-    [Row, onPressItem, theme.icon.delete]
+    [Row, onPressItem]
   );
 
   const listHeaderComponent = useCallback(() => {
     return (
       <View>
-        <FavoritChip />
+        <FavoritChip
+          onPressChipContents={onPressChipContents}
+          onPressChipDelete={onPressChipDelete}
+        />
 
         <StyledText
           isBlod
@@ -227,7 +247,7 @@ const Memo = () => {
         </StyledText>
       </View>
     );
-  }, [theme.color.text]);
+  }, [theme.color.text, onPressChipContents, onPressChipDelete]);
 
   const listFooterComponent = useCallback(() => {
     return <Footer />;

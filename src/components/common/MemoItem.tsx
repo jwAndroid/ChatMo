@@ -62,7 +62,7 @@ interface IMemoItem {
   date: number;
   count: number;
   isLock: boolean;
-  image: ImageSourcePropType;
+  image?: ImageSourcePropType;
 }
 
 const MemoItem: FC<IMemoItem> = ({

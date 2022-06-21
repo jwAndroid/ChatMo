@@ -1,5 +1,5 @@
 import { FC, memo, useCallback } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, GestureResponderEvent, Pressable } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
@@ -44,10 +44,15 @@ const DeleteIcon = styled.Image(() => ({
 }));
 
 interface IFavoritChip {
+  onPressChipContents: (event: GestureResponderEvent) => () => void;
+  onPressChipDelete: (event: GestureResponderEvent) => () => void;
   // items: RoomEntity[];
 }
 
-const FavoritChip: FC<IFavoritChip> = () => {
+const FavoritChip: FC<IFavoritChip> = ({
+  onPressChipContents,
+  onPressChipDelete,
+}) => {
   const theme = useTheme();
 
   const keyExtractor = useCallback((item) => `${item.id}`, []);
@@ -57,7 +62,12 @@ const FavoritChip: FC<IFavoritChip> = () => {
       return (
         <Container>
           <ContentsContainer>
-            <StyledText color={theme.color.text} fontSize={15} isBlod>
+            <StyledText
+              color={theme.color.text}
+              fontSize={15}
+              isBlod
+              onPress={onPressChipContents(item)}
+            >
               {String(item.title).length < 15
                 ? `${String(item.title)}`
                 : `${String(item.title).substring(0, 15)}...`}
@@ -65,12 +75,14 @@ const FavoritChip: FC<IFavoritChip> = () => {
           </ContentsContainer>
 
           <DeleteContainer>
-            <DeleteIcon source={theme.icon.circle_x} />
+            <Pressable onPress={onPressChipDelete(item)}>
+              <DeleteIcon source={theme.icon.circle_x} />
+            </Pressable>
           </DeleteContainer>
         </Container>
       );
     },
-    [theme]
+    [theme, onPressChipContents, onPressChipDelete]
   );
 
   return (
