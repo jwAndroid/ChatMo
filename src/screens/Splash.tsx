@@ -35,7 +35,7 @@ const Splash = () => {
   const [appIsReady, setAppIsReady] = useState(false);
   const [isWhite, setIsWhite] = useState(true);
   const [cacheReady, setCacheReady] = useState(false);
-  const [isConnected, setIsConnected] = useState<boolean | null>(false);
+  const [isConnected, setIsConnected] = useState<boolean | null>(true);
 
   const notification = useMemo(() => {
     return '챗모 앱 서비스를 사용하기 위해,\n네트워크 연결을 확인해주세요.';

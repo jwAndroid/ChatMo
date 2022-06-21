@@ -13,8 +13,6 @@ import { APP_THEME_KEY } from './src/api/constants';
 const App = () => {
   const [theme, setTheme] = useState(lightTheme);
 
-  console.log(theme.themeName);
-
   useEffect(() => {
     EventRegister.addEventListener('changeTheme', (data) => {
       setTheme(data ? lightTheme : darkTheme);
