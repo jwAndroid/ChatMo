@@ -202,7 +202,7 @@ const Memo = () => {
   );
 
   const listHeaderComponent = useCallback(() => {
-    return <FavoritChip items={sample} />;
+    return <FavoritChip />;
   }, []);
 
   const listFooterComponent = useCallback(() => {

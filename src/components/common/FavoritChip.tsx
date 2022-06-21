@@ -1,37 +1,75 @@
-import { FC, memo } from 'react';
-import { ScrollView } from 'react-native';
+import { FC, memo, useCallback } from 'react';
+import { FlatList, Text } from 'react-native';
 import styled from '@emotion/native';
-import { RoomEntity } from '../../entity';
+import { useTheme } from '@emotion/react';
+
+import { chipData } from '../../api/sampleData';
 
 const Container = styled.View(({ theme }) => ({
-  felx: 1,
+  flex: 1,
   flexDirection: 'row',
-  backgroundColor: theme.color.sky_400,
-  //   backgroundColor: theme.color.background,
+  paddingHorizontal: 8,
+  backgroundColor: theme.color.background,
 }));
 
-const ChipContainer = styled.View(() => ({
-  width: 150,
-  height: 50,
-  marginLeft: 10,
-  backgroundColor: 'red',
+const ContentsContainer = styled.View(() => ({
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: 'gray',
+}));
+
+const DeleteContainer = styled.Pressable(() => ({
+  width: 30,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: 'blue',
+}));
+
+const DeleteIcon = styled.Image(() => ({
+  width: 15,
+  height: 15,
+  tintColor: 'white',
 }));
 
 interface IFavoritChip {
-  items: [];
   // items: RoomEntity[];
 }
 
-const FavoritChip: FC<IFavoritChip> = ({ items }) => {
+const FavoritChip: FC<IFavoritChip> = () => {
+  const theme = useTheme();
+
+  const keyExtractor = useCallback((item) => `${item.id}`, []);
+
+  const renderItem = useCallback(
+    ({ item }) => {
+      return (
+        <Container>
+          <ContentsContainer>
+            <Text>
+              {String(item.title).length < 15
+                ? String(item.title)
+                : `${String(item.title).substring(0, 15)}...`}
+            </Text>
+          </ContentsContainer>
+
+          <DeleteContainer>
+            <DeleteIcon source={theme.icon.delete} />
+          </DeleteContainer>
+        </Container>
+      );
+    },
+    [theme]
+  );
+
   return (
-    <ScrollView horizontal>
-      <Container>
-        <ChipContainer />
-        <ChipContainer />
-        <ChipContainer />
-        <ChipContainer />
-      </Container>
-    </ScrollView>
+    <FlatList
+      data={chipData}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+    />
   );
 };
 
