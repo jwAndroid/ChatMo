@@ -86,7 +86,7 @@ const MemoItem: FC<IMemoItem> = ({
       <ContentsContainer>
         <TitleContainer>
           <StyledText color={theme.color.text} fontSize={16} isBlod>
-            {title.length < 15 ? `${title}` : `${title.substring(0, 15)}...`}
+            {title.length < 17 ? `${title}` : `${title.substring(0, 17)}...`}
           </StyledText>
 
           {isLock && <Icon source={theme.icon.lock} />}
