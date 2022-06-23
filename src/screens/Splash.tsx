@@ -1,5 +1,5 @@
 import { memo, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import { StatusBar } from 'react-native';
+import { Dimensions, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { signInAnonymously } from 'firebase/auth';
 import NetInfo from '@react-native-community/netinfo';
@@ -12,6 +12,8 @@ import { Navigation } from '../navigation';
 import { auth } from '../api/firebase';
 import { APP_THEME_KEY } from '../api/constants';
 import { TextModal } from '../components/common';
+
+const { width } = Dimensions.get('screen');
 
 interface ILogoContainer {
   isWhite: boolean;
@@ -26,8 +28,8 @@ const LogoContainer = styled.View<ILogoContainer>(({ theme, isWhite }) => ({
 }));
 
 const Logo = styled.Image({
-  width: '100%',
-  resizeMode: 'contain',
+  width: width / 2,
+  resizeMode: 'center',
 });
 
 const Splash = () => {

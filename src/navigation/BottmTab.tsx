@@ -50,7 +50,7 @@ const BottmTab = () => {
               height: 50 + insets.bottom / 2,
               borderTopWidth: 0,
             },
-            tabBarIcon: () => {
+            tabBarIcon: ({ focused }) => {
               return (
                 <Image
                   source={
@@ -58,7 +58,11 @@ const BottmTab = () => {
                       ? theme.icon.list_black
                       : theme.icon.list_white
                   }
-                  style={{ width: 22, height: 22 }}
+                  style={{
+                    width: 20,
+                    height: 20,
+                    tintColor: focused ? theme.color.sky_300 : undefined,
+                  }}
                 />
               );
             },
@@ -78,7 +82,7 @@ const BottmTab = () => {
               height: 50 + insets.bottom / 2,
               borderTopWidth: 0,
             },
-            tabBarIcon: () => {
+            tabBarIcon: ({ focused }) => {
               return (
                 <Image
                   source={
@@ -86,7 +90,11 @@ const BottmTab = () => {
                       ? theme.icon.statistic_black
                       : theme.icon.statistic_white
                   }
-                  style={{ width: 22, height: 22 }}
+                  style={{
+                    width: 20,
+                    height: 20,
+                    tintColor: focused ? theme.color.sky_300 : undefined,
+                  }}
                 />
               );
             },
@@ -106,7 +114,7 @@ const BottmTab = () => {
               height: 50 + insets.bottom / 2,
               borderTopWidth: 0,
             },
-            tabBarIcon: () => {
+            tabBarIcon: ({ focused }) => {
               return (
                 <Image
                   source={
@@ -114,7 +122,11 @@ const BottmTab = () => {
                       ? theme.icon.settings_black
                       : theme.icon.settings_white
                   }
-                  style={{ width: 22, height: 22 }}
+                  style={{
+                    width: 20,
+                    height: 20,
+                    tintColor: focused ? theme.color.sky_300 : undefined,
+                  }}
                 />
               );
             },
