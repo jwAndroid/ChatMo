@@ -90,6 +90,7 @@ const Room = () => {
           }}
           wrapperStyle={{
             right: {
+              paddingHorizontal: 10,
               borderTopRightRadius: 3,
               backgroundColor: '#6646ee',
             },
