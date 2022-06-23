@@ -33,6 +33,7 @@ declare module '@emotion/react' {
       gray_700: string;
       gray_750: string;
       gray_800: string;
+      gray_830: string;
       gray_850: string;
       gray_900: string;
       gray_950: string;
@@ -51,6 +52,7 @@ declare module '@emotion/react' {
       item: {
         text: string;
         border: string;
+        card_background: string;
       };
     };
     icon: typeof icon;

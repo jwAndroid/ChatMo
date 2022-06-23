@@ -1,11 +1,5 @@
 import { memo, useCallback, useEffect, useMemo } from 'react';
-import {
-  StyleProp,
-  ViewStyle,
-  ListRenderItem,
-  Pressable,
-  View,
-} from 'react-native';
+import { StyleProp, ViewStyle, ListRenderItem, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from '@emotion/native';
@@ -13,11 +7,10 @@ import { useTheme } from '@emotion/react';
 
 import { SafeAreaContainer } from '../../../components/layout';
 import {
-  FavoritChip,
+  Card,
   FloatingButton,
   MainHeader,
   MemoItem,
-  StyledText,
 } from '../../../components/common';
 import { sample } from '../../../api/sampleData';
 import { RoomEntity } from '../../../entity';
@@ -159,16 +152,16 @@ const Memo = () => {
     [navigation]
   );
 
-  const onPressChipContents = useCallback(
+  const onCardPress = useCallback(
     (item) => () => {
-      console.log(item);
+      console.log(`onCardPress ${item.title}`);
     },
     []
   );
 
-  const onPressChipDelete = useCallback(
+  const onStarPress = useCallback(
     (item) => () => {
-      console.log(item);
+      console.log(`onStarPress ${item.title}`);
     },
     []
   );
@@ -228,24 +221,8 @@ const Memo = () => {
   );
 
   const listHeaderComponent = useCallback(() => {
-    return (
-      <View>
-        <FavoritChip
-          onPressChipContents={onPressChipContents}
-          onPressChipDelete={onPressChipDelete}
-        />
-
-        <StyledText
-          color={theme.color.text}
-          fontSize={15}
-          marginTop={10}
-          marginLeft={10}
-        >
-          목록
-        </StyledText>
-      </View>
-    );
-  }, [onPressChipContents, onPressChipDelete, theme.color.text]);
+    return <Card onPress={onCardPress} onStarPress={onStarPress} />;
+  }, [onCardPress, onStarPress]);
 
   const listFooterComponent = useCallback(() => {
     return <Footer />;

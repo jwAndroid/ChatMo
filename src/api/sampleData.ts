@@ -295,3 +295,66 @@ export const chipData = [
   { id: 9, title: 'title9', date: '07-08' },
   { id: 10, title: 'title10', date: '07-08' },
 ];
+
+export const CARD_DATA = [
+  {
+    id: 1,
+    title: '안녕하세요오오오오오오',
+    lastMemo: 'sajegklaskgjasklegjklasejgljsaekgjklasejg',
+    date: '07-07',
+  },
+  {
+    id: 2,
+    title: 't',
+    lastMemo: 'sajegklaskgjasejg',
+    date: '07-08',
+  },
+  {
+    id: 3,
+    title: 'title3',
+    lastMemo: 'sajegklaskgjklasejg',
+    date: '07-08',
+  },
+  {
+    id: 4,
+    title: 'title4',
+    lastMemo: 'sajegklaskgjasklegjklasejgljsaekgjklasejg',
+    date: '07-08',
+  },
+  {
+    id: 5,
+    title: 'title5',
+    lastMemo: 'sajegklaskgjasjklasejg',
+    date: '07-08',
+  },
+  {
+    id: 6,
+    title: 'title6',
+    lastMemo: 'sajegkljklasejgljsaekgjklasejg',
+    date: '2022-07-08',
+  },
+  {
+    id: 7,
+    title: 'title7',
+    lastMemo: 'sajg',
+    date: '2022-07-08',
+  },
+  {
+    id: 8,
+    title: 'title8',
+    lastMemo: 'sajegklsaekgjklasejg',
+    date: '2022-07-08',
+  },
+  {
+    id: 9,
+    title: 'title9',
+    lastMemo: 'sajegklaskgjasklegjklasejgljsaekgjklasejg',
+    date: '2022-07-08',
+  },
+  {
+    id: 10,
+    title: 'title10',
+    lastMemo: 'sajegklasasejg',
+    date: '2022-07-08',
+  },
+];
