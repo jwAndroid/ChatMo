@@ -1,12 +1,11 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useMemo } from 'react';
+import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import styled from '@emotion/native';
-import { useTheme } from '@emotion/react';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
 import { SafeAreaContainer } from '../../../components/layout';
-import { Divider, MainHeader, StyledText } from '../../../components/common';
+import { Divider, MainHeader, SettingItem } from '../../../components/common';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -14,60 +13,51 @@ const Container = styled.View(({ theme }) => ({
 }));
 
 const Setting = () => {
-  const theme = useTheme();
-
   const navigation = useNavigation<SettingScreenNavigationProp>();
 
-  const onPress = useCallback(() => {
-    navigation.navigate('ThemeStyle');
-  }, [navigation]);
+  const settings = useMemo(
+    () => [
+      { id: 1, title: '테마설정' },
+      { id: 2, title: '이용약관' },
+      { id: 3, title: '개인정보보호' },
+      { id: 4, title: '비밀번호 설정' },
+    ],
+    []
+  );
+
+  const keyExtractor = useCallback((item) => `${item.id}`, []);
+
+  const onPress = useCallback(
+    (title: string) => () => {
+      if (title === settings[0].title) {
+        navigation.navigate('ThemeStyle');
+      }
+    },
+    [navigation, settings]
+  );
+
+  const renderItem = useCallback(
+    ({ item }) => {
+      return <SettingItem title={item.title} onPress={onPress} />;
+    },
+    [onPress]
+  );
+
+  const divider = useCallback(() => {
+    return <Divider />;
+  }, []);
 
   return (
     <SafeAreaContainer>
       <Container>
         <MainHeader title="Setting" />
 
-        <TouchableWithoutFeedback onPress={onPress}>
-          <StyledText
-            fontSize={14}
-            color={theme.color.text}
-            marginLeft={20}
-            marginTop={15}
-            marginBottom={15}
-          >
-            테마설정
-          </StyledText>
-        </TouchableWithoutFeedback>
-
-        <Divider />
-
-        <TouchableWithoutFeedback>
-          <StyledText
-            fontSize={14}
-            color={theme.color.text}
-            marginLeft={20}
-            marginTop={15}
-            marginBottom={15}
-          >
-            이용약관
-          </StyledText>
-        </TouchableWithoutFeedback>
-
-        <Divider />
-
-        <TouchableWithoutFeedback>
-          <StyledText
-            fontSize={14}
-            color={theme.color.text}
-            marginLeft={20}
-            marginTop={15}
-            marginBottom={15}
-          >
-            개인정보보호
-          </StyledText>
-        </TouchableWithoutFeedback>
-
-        <Divider />
+        <FlatList
+          data={settings}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          ItemSeparatorComponent={divider}
+        />
       </Container>
     </SafeAreaContainer>
   );

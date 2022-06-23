@@ -7,5 +7,6 @@ export { default as FloatingButton } from './FloatingButton';
 export { default as IconHeader } from './IconHeader';
 export { default as MainHeader } from './MainHeader';
 export { default as MemoItem } from './MemoItem';
+export { default as SettingItem } from './SettingItem';
 export { default as StyledText } from './StyledText';
 export { default as TextModal } from './TextModal';
