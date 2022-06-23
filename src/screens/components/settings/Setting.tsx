@@ -20,7 +20,7 @@ const Setting = () => {
       { id: 1, title: '테마설정' },
       { id: 2, title: '이용약관' },
       { id: 3, title: '개인정보보호' },
-      { id: 4, title: '비밀번호 설정' },
+      { id: 4, title: '앱 비밀번호 설정' },
     ],
     []
   );

@@ -1,5 +1,7 @@
-import { useTheme } from '@emotion/react';
 import { FC, memo } from 'react';
+import { Pressable } from 'react-native';
+import { useTheme } from '@emotion/react';
+
 import StyledText from './StyledText';
 
 interface ISettings {
@@ -11,16 +13,17 @@ const Settings: FC<ISettings> = ({ title, onPress }) => {
   const theme = useTheme();
 
   return (
-    <StyledText
-      fontSize={14}
-      color={theme.color.text}
-      marginLeft={20}
-      marginTop={15}
-      marginBottom={15}
-      onPress={onPress(title)}
-    >
-      {title}
-    </StyledText>
+    <Pressable onPress={onPress(title)} style={{ flex: 1 }}>
+      <StyledText
+        fontSize={14}
+        color={theme.color.text}
+        marginLeft={20}
+        marginTop={15}
+        marginBottom={15}
+      >
+        {title}
+      </StyledText>
+    </Pressable>
   );
 };
 

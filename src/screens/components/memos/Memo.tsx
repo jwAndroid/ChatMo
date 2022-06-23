@@ -166,7 +166,9 @@ const Memo = () => {
     []
   );
 
-  const onPressFloatingButton = useCallback(() => {}, []);
+  const onPressFloatingButton = useCallback(() => {
+    navigation.navigate('Room');
+  }, [navigation]);
 
   const renderHiddenItem = useCallback(
     ({ item }, rowMap) => {
