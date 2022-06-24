@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useMemo } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { StyleProp, ViewStyle, ListRenderItem, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -41,9 +41,11 @@ const Memo = () => {
 
   const navigation = useNavigation<MemoScreenNavigationProp>();
 
-  // const [listData, setListData] = useState(sample);
+  const [data, setData] = useState<RoomEntity[]>([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setData(sample);
+  }, []);
 
   const Row = useMemo<StyleProp<ViewStyle>>(
     () => ({
@@ -234,9 +236,10 @@ const Memo = () => {
       <MainHeader title="List" />
 
       <SwipeListView
-        data={sample}
+        data={data}
         keyExtractor={keyExtractor}
         stickySectionHeadersEnabled={false}
+        showsVerticalScrollIndicator={false}
         renderItem={renderItem}
         renderHiddenItem={renderHiddenItem}
         ListHeaderComponent={listHeaderComponent}

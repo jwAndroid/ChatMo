@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useMemo } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { FlatList, Dimensions, GestureResponderEvent } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
@@ -70,8 +70,6 @@ interface ICard {
 const Card: FC<ICard> = ({ onPress, onStarPress }) => {
   const theme = useTheme();
 
-  const randomColor = useMemo(() => require('randomcolor'), []);
-
   const keyExtractor = useCallback((item) => `${item.id}`, []);
 
   const renderItem = useCallback(
@@ -83,12 +81,7 @@ const Card: FC<ICard> = ({ onPress, onStarPress }) => {
       return (
         <Container>
           <CardConatiner onPress={onPress(item)}>
-            <TitleContainer
-              backgroundColor={randomColor({
-                luminosity: 'light',
-                hue: 'blue',
-              })}
-            >
+            <TitleContainer backgroundColor={theme.color.sky_400}>
               <StyledText
                 fontSize={12}
                 color={theme.color.gray_830}
@@ -128,7 +121,7 @@ const Card: FC<ICard> = ({ onPress, onStarPress }) => {
         </Container>
       );
     },
-    [randomColor, onPress, onStarPress, theme]
+    [onPress, onStarPress, theme]
   );
 
   return (

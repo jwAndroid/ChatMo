@@ -9,14 +9,13 @@ export interface RoomEntity {
   isFavorites: boolean;
   isCompleate: boolean;
   isPin: boolean;
-  isLook: boolean;
+  isLock: boolean;
   password: number;
   status: number;
   createdAt: number;
   updatedAt: number;
   lastUpdateOn: number;
 }
-
 export interface Memontity {
   text: string;
 }

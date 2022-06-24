@@ -19,10 +19,8 @@ const BottmTab = () => {
 
   const screenOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
-      unmountOnBlur: true,
       headerShown: false,
       tabBarShowLabel: false,
-      tabBarIconStyle: { flex: 1 },
       tabBarItemStyle: {
         justifyContent: 'center',
         backgroundColor: theme.color.tab.background,
