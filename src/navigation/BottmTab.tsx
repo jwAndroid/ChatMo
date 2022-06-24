@@ -19,21 +19,17 @@ const BottmTab = () => {
 
   const screenOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
+      unmountOnBlur: true,
       headerShown: false,
       tabBarShowLabel: false,
-      tabBarStyle: {
-        height: 50 + insets.bottom / 2,
-        borderTopWidth: 0,
-      },
-      tabBarIconStyle: { flex: 0 },
+      tabBarIconStyle: { flex: 1 },
       tabBarItemStyle: {
-        flex: 1,
         justifyContent: 'center',
         backgroundColor: theme.color.tab.background,
       },
       tabBarHideOnKeyboard: true,
     }),
-    [insets, theme]
+    [theme]
   );
 
   return (
@@ -47,8 +43,8 @@ const BottmTab = () => {
           return {
             tabBarStyle: {
               display: routeName === 'Memo' ? 'flex' : 'none',
-              height: 50 + insets.bottom / 2,
-              borderTopWidth: 0,
+              height: 70 + insets.bottom / 2,
+              backgroundColor: theme.color.tab.background,
             },
             tabBarIcon: ({ focused }) => {
               return (
@@ -59,8 +55,8 @@ const BottmTab = () => {
                       : theme.icon.list_white
                   }
                   style={{
-                    width: 20,
-                    height: 20,
+                    width: 22,
+                    height: 22,
                     tintColor: focused ? theme.color.sky_300 : undefined,
                   }}
                 />
@@ -79,8 +75,8 @@ const BottmTab = () => {
           return {
             tabBarStyle: {
               display: routeName === 'Statistics' ? 'flex' : 'none',
-              height: 50 + insets.bottom / 2,
-              borderTopWidth: 0,
+              height: 70 + insets.bottom / 2,
+              backgroundColor: theme.color.tab.background,
             },
             tabBarIcon: ({ focused }) => {
               return (
@@ -91,8 +87,8 @@ const BottmTab = () => {
                       : theme.icon.statistic_white
                   }
                   style={{
-                    width: 20,
-                    height: 20,
+                    width: 22,
+                    height: 22,
                     tintColor: focused ? theme.color.sky_300 : undefined,
                   }}
                 />
@@ -111,8 +107,8 @@ const BottmTab = () => {
           return {
             tabBarStyle: {
               display: routeName === 'Setting' ? 'flex' : 'none',
-              height: 50 + insets.bottom / 2,
-              borderTopWidth: 0,
+              height: 70 + insets.bottom / 2,
+              backgroundColor: theme.color.tab.background,
             },
             tabBarIcon: ({ focused }) => {
               return (
@@ -123,8 +119,8 @@ const BottmTab = () => {
                       : theme.icon.settings_white
                   }
                   style={{
-                    width: 20,
-                    height: 20,
+                    width: 22,
+                    height: 22,
                     tintColor: focused ? theme.color.sky_300 : undefined,
                   }}
                 />

@@ -5,7 +5,6 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
-import { SafeAreaContainer } from '../../../components/layout';
 import {
   Card,
   FloatingButton,
@@ -231,31 +230,29 @@ const Memo = () => {
   }, []);
 
   return (
-    <SafeAreaContainer>
-      <Container>
-        <MainHeader title="List" />
+    <Container>
+      <MainHeader title="List" />
 
-        <SwipeListView
-          data={sample}
-          keyExtractor={keyExtractor}
-          stickySectionHeadersEnabled={false}
-          renderItem={renderItem}
-          renderHiddenItem={renderHiddenItem}
-          ListHeaderComponent={listHeaderComponent}
-          ListFooterComponent={listFooterComponent}
-          leftOpenValue={225}
-          stopLeftSwipe={150}
-          stopRightSwipe={-75}
-          rightOpenValue={-75}
-          previewOpenDelay={3000}
-        />
+      <SwipeListView
+        data={sample}
+        keyExtractor={keyExtractor}
+        stickySectionHeadersEnabled={false}
+        renderItem={renderItem}
+        renderHiddenItem={renderHiddenItem}
+        ListHeaderComponent={listHeaderComponent}
+        ListFooterComponent={listFooterComponent}
+        leftOpenValue={225}
+        stopLeftSwipe={150}
+        stopRightSwipe={-75}
+        rightOpenValue={-75}
+        previewOpenDelay={3000}
+      />
 
-        <FloatingButton
-          source={theme.icon.edit}
-          onPress={onPressFloatingButton}
-        />
-      </Container>
-    </SafeAreaContainer>
+      <FloatingButton
+        source={theme.icon.edit}
+        onPress={onPressFloatingButton}
+      />
+    </Container>
   );
 };
 

@@ -3,7 +3,6 @@ import styled from '@emotion/native';
 import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { SafeAreaContainer } from '../../../components/layout';
 import { MainHeader } from '../../../components/common';
 import { RoomScreenNavigationProp } from '../../stacks/StatisticsStack';
 
@@ -22,15 +21,13 @@ const Statistics = () => {
   }, [navigation]);
 
   return (
-    <SafeAreaContainer>
-      <Container>
-        <MainHeader title="Statistics" />
+    <Container>
+      <MainHeader title="Statistics" />
 
-        <Text style={{ color: 'white' }} onPress={onPress}>
-          go room
-        </Text>
-      </Container>
-    </SafeAreaContainer>
+      <Text style={{ color: 'white' }} onPress={onPress}>
+        go room
+      </Text>
+    </Container>
   );
 };
 

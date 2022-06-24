@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 import styled from '@emotion/native';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
-import { SafeAreaContainer } from '../../../components/layout';
 import { Divider, MainHeader, SettingItem } from '../../../components/common';
 
 const Container = styled.View(({ theme }) => ({
@@ -48,18 +47,16 @@ const Setting = () => {
   }, []);
 
   return (
-    <SafeAreaContainer>
-      <Container>
-        <MainHeader title="Setting" />
+    <Container>
+      <MainHeader title="Setting" />
 
-        <FlatList
-          data={settings}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          ItemSeparatorComponent={divider}
-        />
-      </Container>
-    </SafeAreaContainer>
+      <FlatList
+        data={settings}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        ItemSeparatorComponent={divider}
+      />
+    </Container>
   );
 };
 

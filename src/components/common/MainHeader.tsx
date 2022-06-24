@@ -1,22 +1,17 @@
-import { FC, memo, ReactNode } from 'react';
-import { Platform } from 'react-native';
+import { FC, memo, ReactNode, useMemo } from 'react';
+import { Platform, StatusBar } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 import StyledText from './StyledText';
 
-const HeaderContainer = styled.View(({ theme }) => ({
-  flexDirection: 'row',
-  width: '100%',
-  height: 50,
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  paddingHorizontal: 20,
-  marginTop: Platform.OS === 'android' ? -2.5 : 0,
-  backgroundColor: theme.color.header.background,
-}));
+interface IShadowContainer {
+  inset: number | undefined;
+}
 
-const ShadowContainer = styled.View(({ theme }) => {
+const ShadowContainer = styled.View<IShadowContainer>(({ theme, inset }) => {
   const shadow = Platform.select({
     ios: {
       shadowColor: '#000000',
@@ -36,9 +31,21 @@ const ShadowContainer = styled.View(({ theme }) => {
     ...shadow,
     zIndex: 2,
     width: '100%',
+    marginTop: inset,
     backgroundColor: theme.color.background,
   };
 });
+
+const HeaderContainer = styled.View(({ theme }) => ({
+  flexDirection: 'row',
+  width: '100%',
+  height: 50,
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  paddingHorizontal: 20,
+  marginTop: Platform.OS === 'android' ? -2.5 : 0,
+  backgroundColor: theme.color.header.background,
+}));
 
 interface IHeader {
   title: ReactNode;
@@ -47,8 +54,14 @@ interface IHeader {
 const StackHeader: FC<IHeader> = ({ title }) => {
   const theme = useTheme();
 
+  const insets = useMemo(() => {
+    return Platform.OS === 'ios'
+      ? getStatusBarHeight(true)
+      : StatusBar.currentHeight;
+  }, []);
+
   return (
-    <ShadowContainer>
+    <ShadowContainer inset={insets}>
       <HeaderContainer>
         <StyledText fontSize={20} color={theme.color.text} isBlod>
           {title}
