@@ -49,10 +49,7 @@ interface IFavoritChip {
   // items: RoomEntity[];
 }
 
-const FavoritChip: FC<IFavoritChip> = ({
-  onPressChipContents,
-  onPressChipDelete,
-}) => {
+const Chip: FC<IFavoritChip> = ({ onPressChipContents, onPressChipDelete }) => {
   const theme = useTheme();
 
   const keyExtractor = useCallback((item) => `${item.id}`, []);
@@ -108,4 +105,4 @@ const FavoritChip: FC<IFavoritChip> = ({
   );
 };
 
-export default memo(FavoritChip);
+export default memo(Chip);
