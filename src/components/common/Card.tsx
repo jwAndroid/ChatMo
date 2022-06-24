@@ -17,7 +17,7 @@ const Container = styled.Pressable(({ theme }) => ({
 }));
 
 const CardConatiner = styled.Pressable(({ theme }) => ({
-  width: width / 2.3,
+  width: width / 2.5,
   height: 66,
   marginHorizontal: 10,
   borderRadius: 8,
@@ -58,7 +58,7 @@ const IconContainer = styled.Pressable(() => ({
 const Icon = styled.Image(() => ({
   width: 17,
   height: 17,
-  tintColor: 'gray',
+  tintColor: '#FECE00',
   marginRight: 3,
 }));
 

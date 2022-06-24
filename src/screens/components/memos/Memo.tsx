@@ -245,10 +245,9 @@ const Memo = () => {
         ListHeaderComponent={listHeaderComponent}
         ListFooterComponent={listFooterComponent}
         leftOpenValue={225}
-        stopLeftSwipe={150}
+        stopLeftSwipe={225}
         stopRightSwipe={-75}
         rightOpenValue={-75}
-        previewOpenDelay={3000}
       />
 
       <FloatingButton
