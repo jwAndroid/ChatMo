@@ -20,7 +20,6 @@ import {
 } from '../../stacks/MemoStack';
 import { RoomEntity } from '../../../entity';
 import { DayHeader, IconHeader } from '../../../components/common';
-import { SafeAreaContainer } from '../../../components/layout';
 
 const Container = styled.View(() => ({
   flex: 1,
@@ -155,22 +154,20 @@ const Room = () => {
   );
 
   return (
-    <SafeAreaContainer>
-      <Container>
-        <IconHeader onBackPress={onBackPress} title="설정" backIcon />
+    <Container>
+      <IconHeader onBackPress={onBackPress} title="설정" backIcon />
 
-        <GiftedChat
-          alignTop
-          messages={messages}
-          renderBubble={renderBubble}
-          renderMessageText={renderMessageText}
-          keyboardShouldPersistTaps="handled"
-          renderDay={renderDay}
-          onSend={(messages) => onSend(messages)}
-          user={{ _id: uid }}
-        />
-      </Container>
-    </SafeAreaContainer>
+      <GiftedChat
+        alignTop
+        messages={messages}
+        renderBubble={renderBubble}
+        renderMessageText={renderMessageText}
+        keyboardShouldPersistTaps="handled"
+        renderDay={renderDay}
+        onSend={(messages) => onSend(messages)}
+        user={{ _id: uid }}
+      />
+    </Container>
   );
 };
 
