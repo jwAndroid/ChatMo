@@ -1,49 +1,55 @@
+import { FC, memo, ReactNode, useMemo } from 'react';
+import { ImageSourcePropType, Platform, StatusBar } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
-import { FC, memo, ReactNode } from 'react';
-import { ImageSourcePropType } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import StyledText from './StyledText';
 
-const HeaderContainer = styled.View(({ theme }) => ({
+interface IHeaderContainer {
+  insets: number | undefined;
+}
+
+const HeaderContainer = styled.View<IHeaderContainer>(({ theme, insets }) => ({
   height: 50,
   flexDirection: 'row',
-  paddingHorizontal: 20,
+  justifyContent: 'space-between',
+  marginTop: insets,
+  marginBottom: -30,
   backgroundColor: theme.color.header.background,
 }));
 
-const LeftContainer = styled.View(() => ({
-  flex: 1,
+const LeftContainer = styled.Pressable(() => ({
   justifyContent: 'center',
+  paddingHorizontal: 10,
+  marginLeft: 5,
 }));
 
-const TitleContainer = styled.View(() => ({
-  flex: 1,
+const CenterContainer = styled.View(() => ({
   justifyContent: 'center',
   alignItems: 'center',
 }));
 
-const RightContainer = styled.View(() => ({
-  flex: 1,
+const RightContainer = styled.Pressable(() => ({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'flex-end',
+  paddingHorizontal: 10,
+  marginRight: 5,
 }));
 
-const Icon = styled.Image({
+const Icon = styled.Image(({ theme }) => ({
   width: 16,
   height: 16,
-});
+  tintColor: theme.color.item.arrow,
+}));
 
 interface IIconHeader {
   title: ReactNode;
   backIcon?: boolean;
-  onBackPress?: (() => void) | undefined;
+  onBackPress?: () => void;
   one?: ImageSourcePropType;
-  onOnePress?: (() => void) | undefined;
-  two?: ImageSourcePropType;
-  onTwoPress?: (() => void) | undefined;
+  onOnePress?: () => void;
 }
 
 const IconHeader: FC<IIconHeader> = ({
@@ -52,46 +58,31 @@ const IconHeader: FC<IIconHeader> = ({
   onBackPress,
   one,
   onOnePress,
-  two,
-  onTwoPress,
 }) => {
   const theme = useTheme();
 
+  const insets = useMemo(() => {
+    return Platform.OS === 'ios'
+      ? getStatusBarHeight(true)
+      : StatusBar.currentHeight;
+  }, []);
+
   return (
-    <HeaderContainer>
-      <LeftContainer>
-        {backIcon && (
-          <TouchableWithoutFeedback onPress={onBackPress}>
-            <Icon
-              source={
-                theme.name === 'lightTheme'
-                  ? theme.icon.back_arrow_black
-                  : theme.icon.back_arrow_white
-              }
-            />
-          </TouchableWithoutFeedback>
-        )}
+    <HeaderContainer insets={insets}>
+      <LeftContainer onPress={onBackPress}>
+        {backIcon && <Icon source={theme.icon.back_arrow_black} />}
       </LeftContainer>
 
-      <TitleContainer>
+      <CenterContainer>
         {title && (
           <StyledText isBlod fontSize={15} color={theme.color.text}>
             {title}
           </StyledText>
         )}
-      </TitleContainer>
+      </CenterContainer>
 
-      <RightContainer>
-        {one && (
-          <TouchableWithoutFeedback onPress={onOnePress}>
-            <Icon source={one} resizeMode="contain" />
-          </TouchableWithoutFeedback>
-        )}
-        {two && (
-          <TouchableWithoutFeedback onPress={onTwoPress}>
-            <Icon source={two} resizeMode="contain" />
-          </TouchableWithoutFeedback>
-        )}
+      <RightContainer onPress={onOnePress}>
+        {one && <Icon source={theme.icon.more} />}
       </RightContainer>
     </HeaderContainer>
   );

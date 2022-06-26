@@ -21,9 +21,9 @@ import {
 import { RoomEntity } from '../../../entity';
 import { DayHeader, IconHeader } from '../../../components/common';
 
-const Container = styled.View(() => ({
+const Container = styled.View(({ theme }) => ({
   flex: 1,
-  backgroundColor: 'gray',
+  backgroundColor: theme.color.background,
 }));
 
 const Room = () => {
@@ -73,6 +73,8 @@ const Room = () => {
   const onBackPress = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
+
+  const onPressMore = useCallback(() => {}, []);
 
   const renderBubble = useCallback(
     (
@@ -155,14 +157,24 @@ const Room = () => {
 
   return (
     <Container>
-      <IconHeader onBackPress={onBackPress} title="설정" backIcon />
+      <IconHeader
+        onBackPress={onBackPress}
+        title={
+          entity?.title!! && entity.title.length < 15
+            ? entity?.title
+            : `${entity?.title.substring(0, 15)}...`
+        }
+        backIcon
+        one={theme.icon.more}
+        onOnePress={onPressMore}
+      />
 
       <GiftedChat
         alignTop
         messages={messages}
         renderBubble={renderBubble}
-        renderMessageText={renderMessageText}
         keyboardShouldPersistTaps="handled"
+        renderMessageText={renderMessageText}
         renderDay={renderDay}
         onSend={(messages) => onSend(messages)}
         user={{ _id: uid }}

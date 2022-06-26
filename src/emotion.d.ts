@@ -53,6 +53,7 @@ declare module '@emotion/react' {
         text: string;
         border: string;
         card_background: string;
+        arrow: string;
       };
     };
     icon: typeof icon;

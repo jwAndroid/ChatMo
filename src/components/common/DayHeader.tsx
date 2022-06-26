@@ -1,7 +1,7 @@
 import { FC, memo, ReactNode, useMemo } from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
-import { Day, DayProps, IMessage } from 'react-native-gifted-chat';
 import { useTheme } from '@emotion/react';
+import { Day, DayProps, IMessage } from 'react-native-gifted-chat';
 
 const weeks = [
   '일요일',
@@ -21,17 +21,8 @@ const DayHeader: FC<IDayHeader> = ({ props }) => {
   const theme = useTheme();
 
   const containerStyle = useMemo<StyleProp<ViewStyle>>(() => {
-    return { marginTop: 0, marginBottom: 10 };
+    return { marginTop: 10, marginBottom: 10 };
   }, []);
-
-  const wrapperStyle = useMemo<StyleProp<ViewStyle>>(() => {
-    return {
-      paddingVertical: 2,
-      paddingHorizontal: 10,
-      borderRadius: 10,
-      backgroundColor: theme.color.sky_300,
-    };
-  }, [theme.color.sky_300]);
 
   const textStyle = useMemo<StyleProp<TextStyle>>(() => {
     return {
@@ -39,15 +30,15 @@ const DayHeader: FC<IDayHeader> = ({ props }) => {
       textAlignVertical: 'center',
       includeFontPadding: false,
       fontFamily: theme.font.YoonGothicRegular,
-      color: theme.color.white,
+      color: theme.color.item.text,
+      fontWeight: '500',
     };
-  }, [theme.color.white, theme.font.YoonGothicRegular]);
+  }, [theme.color.item.text, theme.font.YoonGothicRegular]);
 
   return (
     <Day
       {...props}
       containerStyle={containerStyle}
-      wrapperStyle={wrapperStyle}
       textStyle={textStyle}
       dateFormat={`YYYY년 M월 D일 ${weeks[new Date().getDay()]}`}
     />
