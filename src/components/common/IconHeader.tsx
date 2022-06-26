@@ -8,16 +8,20 @@ import StyledText from './StyledText';
 
 interface IHeaderContainer {
   insets: number | undefined;
+  marginBottom?: number;
 }
 
-const HeaderContainer = styled.View<IHeaderContainer>(({ theme, insets }) => ({
-  height: 50,
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  marginTop: insets,
-  marginBottom: -30,
-  backgroundColor: theme.color.header.background,
-}));
+const HeaderContainer = styled.View<IHeaderContainer>(
+  ({ theme, insets, marginBottom }) => ({
+    height: 50,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: insets,
+    marginBottom,
+    zIndex: 1,
+    backgroundColor: theme.color.header.background,
+  })
+);
 
 const LeftContainer = styled.Pressable(() => ({
   justifyContent: 'center',
@@ -47,6 +51,7 @@ const Icon = styled.Image(({ theme }) => ({
 interface IIconHeader {
   title: ReactNode;
   backIcon?: boolean;
+  marginBottom?: number;
   onBackPress?: () => void;
   one?: ImageSourcePropType;
   onOnePress?: () => void;
@@ -55,6 +60,7 @@ interface IIconHeader {
 const IconHeader: FC<IIconHeader> = ({
   title,
   backIcon,
+  marginBottom,
   onBackPress,
   one,
   onOnePress,
@@ -68,7 +74,7 @@ const IconHeader: FC<IIconHeader> = ({
   }, []);
 
   return (
-    <HeaderContainer insets={insets}>
+    <HeaderContainer insets={insets} marginBottom={marginBottom}>
       <LeftContainer onPress={onBackPress}>
         {backIcon && <Icon source={theme.icon.back_arrow_black} />}
       </LeftContainer>

@@ -41,6 +41,7 @@
     "react/no-unstable-nested-components": "off",
     "react/style-prop-object": "off",
     "operator-linebreak": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "no-underscore-dangle": "off"
   }
 }

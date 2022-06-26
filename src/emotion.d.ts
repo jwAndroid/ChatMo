@@ -39,6 +39,7 @@ declare module '@emotion/react' {
       gray_950: string;
       gray_1000: string;
       red_error: string;
+      white_blue: string;
       sky_100: string;
       sky_200: string;
       sky_300: string;

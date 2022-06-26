@@ -4,22 +4,18 @@ import styled from '@emotion/native';
 import {
   GiftedChat,
   IMessage,
-  Bubble,
   BubbleProps,
   DayProps,
-  MessageTextProps,
 } from 'react-native-gifted-chat';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { getAuth } from 'firebase/auth';
-import { LinkPreview } from '@flyerhq/react-native-link-preview';
-import { Text, View } from 'react-native';
 
 import {
   MemoScreenNavigationProp,
   MemoScreenRouteProp,
 } from '../../stacks/MemoStack';
 import { RoomEntity } from '../../../entity';
-import { DayHeader, IconHeader } from '../../../components/common';
+import { BubbleItem, DayHeader, IconHeader } from '../../../components/common';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -52,21 +48,20 @@ const Room = () => {
   }, [params]);
 
   useEffect(() => {
-    // 들어올 데이터
     setMessages([
       {
-        _id: 1, // 메세지 id
+        _id: 1,
         text: 'Hello developer',
         createdAt: new Date(),
         user: {
-          _id: uid, // userId
+          _id: uid,
         },
+        received: true,
       },
     ]);
   }, [uid]);
 
   const onSend = useCallback((messages = []) => {
-    // 쓸 데이터
     setMessages((prev) => GiftedChat.append(prev, messages));
   }, []);
 
@@ -74,39 +69,24 @@ const Room = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const onPressMore = useCallback(() => {}, []);
+  const onPressMore = useCallback(() => {
+    console.log('more');
+  }, []);
+
+  const onPressBubble = useCallback((_, message) => {
+    if (message) {
+      console.log(message);
+    }
+  }, []);
 
   const renderBubble = useCallback(
     (
       props: Readonly<BubbleProps<IMessage>> &
         Readonly<{ children?: ReactNode }>
     ) => {
-      return (
-        <Bubble
-          {...props}
-          containerStyle={{
-            right: {
-              marginTop: 5,
-            },
-          }}
-          wrapperStyle={{
-            right: {
-              paddingHorizontal: 10,
-              borderTopRightRadius: 3,
-              backgroundColor: '#6646ee',
-            },
-          }}
-          textStyle={{
-            right: {
-              color: '#fff',
-              fontSize: 13,
-              fontFamily: theme.font.YoonGothicRegular,
-            },
-          }}
-        />
-      );
+      return <BubbleItem props={props} onPressBubble={onPressBubble} />;
     },
-    [theme]
+    [onPressBubble]
   );
 
   const renderDay = useCallback(
@@ -116,43 +96,6 @@ const Room = () => {
       return <DayHeader props={props} />;
     },
     []
-  );
-
-  const renderText = useCallback((text: string) => {
-    console.log(`renderText ${text}`);
-
-    return <Text>{text}</Text>;
-  }, []);
-
-  const renderTitle = useCallback((title: string) => {
-    console.log(`renderTitle ${title}`);
-
-    return <Text>{title}</Text>;
-  }, []);
-
-  const renderMessageText = useCallback(
-    (
-      messageText: MessageTextProps<IMessage> &
-        Readonly<{ children?: ReactNode }>
-    ) => {
-      const message = messageText.currentMessage!!.text;
-
-      return (
-        <View>
-          {String(message).includes('https') ? (
-            <LinkPreview
-              text={message}
-              renderText={renderText}
-              enableAnimation
-              renderTitle={renderTitle}
-            />
-          ) : (
-            <Text>{message}</Text>
-          )}
-        </View>
-      );
-    },
-    [renderText, renderTitle]
   );
 
   return (
@@ -165,6 +108,7 @@ const Room = () => {
             : `${entity?.title.substring(0, 15)}...`
         }
         backIcon
+        marginBottom={-30}
         one={theme.icon.more}
         onOnePress={onPressMore}
       />
@@ -174,7 +118,6 @@ const Room = () => {
         messages={messages}
         renderBubble={renderBubble}
         keyboardShouldPersistTaps="handled"
-        renderMessageText={renderMessageText}
         renderDay={renderDay}
         onSend={(messages) => onSend(messages)}
         user={{ _id: uid }}
