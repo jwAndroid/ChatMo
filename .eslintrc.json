@@ -42,6 +42,7 @@
     "react/style-prop-object": "off",
     "operator-linebreak": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-useless-escape": "off"
   }
 }

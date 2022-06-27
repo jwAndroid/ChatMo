@@ -10,7 +10,7 @@ import {
   Time,
   TimeProps,
 } from 'react-native-gifted-chat';
-import { LinkPreview } from '@flyerhq/react-native-link-preview';
+import BubbleText from './BubbleText';
 
 interface IBubbleItem {
   props: Readonly<BubbleProps<IMessage>> & Readonly<{ children?: ReactNode }>;
@@ -23,8 +23,7 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
   const containerStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
     return {
       right: {
-        flex: 1,
-        marginTop: 5,
+        marginVertical: 5,
       },
     };
   }, []);
@@ -32,20 +31,20 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
   const wrapperStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
     return {
       right: {
-        paddingLeft: 22,
-        paddingRight: 12,
+        paddingLeft: 15,
+        paddingRight: 15,
         paddingVertical: 3,
-        backgroundColor: theme.color.white_blue,
+        backgroundColor: theme.color.item.bubble,
       },
     };
-  }, [theme.color.white_blue]);
+  }, [theme.color.item.bubble]);
 
   const bottomContainerStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
     return {
       right: {
-        marginRight: -5,
         alignItems: 'center',
         backgroundColor: 'gray',
+        marginBottom: 3,
       },
     };
   }, []);
@@ -101,44 +100,14 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
     []
   );
 
-  const renderLinkText = useCallback((text: string) => {
-    return <Text>{text}</Text>;
-  }, []);
-
-  const renderLinkTitle = useCallback((title: string) => {
-    return <Text>{title}</Text>;
-  }, []);
-
   const renderMessageText = useCallback(
     (
       messageText: MessageTextProps<IMessage> &
         Readonly<{ children?: ReactNode }>
     ) => {
-      const message = messageText.currentMessage!!.text;
-
-      return (
-        <View>
-          {String(message).includes('https') ? (
-            <LinkPreview
-              text={message}
-              renderText={renderLinkText}
-              enableAnimation
-              renderTitle={renderLinkTitle}
-            />
-          ) : (
-            <Text
-              style={{
-                color: '#000',
-                fontSize: 16,
-              }}
-            >
-              {message}
-            </Text>
-          )}
-        </View>
-      );
+      return <BubbleText messageText={messageText} />;
     },
-    [renderLinkText, renderLinkTitle]
+    []
   );
 
   const containerToPreviousStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
