@@ -8,6 +8,7 @@ export { default as Divider } from './Divider';
 export { default as Chip } from './Chip';
 export { default as FloatingButton } from './FloatingButton';
 export { default as IconHeader } from './IconHeader';
+export { default as LinkViewer } from './LinkViewer';
 export { default as MainHeader } from './MainHeader';
 export { default as MemoItem } from './MemoItem';
 export { default as SettingItem } from './SettingItem';
