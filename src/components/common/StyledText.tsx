@@ -29,6 +29,7 @@ const EmotionText = styled.Text<IEmotionText>(
     marginRight,
     marginTop,
     marginBottom,
+    includeFontPadding: false,
     fontFamily: isBlod
       ? theme.font.YoonGothicBold
       : theme.font.YoonGothicRegular,
