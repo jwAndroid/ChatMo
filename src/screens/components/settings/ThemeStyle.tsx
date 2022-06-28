@@ -27,16 +27,13 @@ const ThemeStyle = () => {
   const theme = useTheme();
 
   const [isEnabled, setIsEnabled] = useState(false);
-  const [click, setClick] = useState(true);
 
   const navigation = useNavigation<SettingScreenNavigationProp>();
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('beforeRemove', async () => {
+    navigation.addListener('beforeRemove', async () => {
       await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
     });
-
-    return unsubscribe;
   }, [navigation, isEnabled]);
 
   useEffect(() => {
@@ -54,18 +51,10 @@ const ThemeStyle = () => {
   }, [navigation, isEnabled]);
 
   const onValueChange = useCallback(() => {
-    setClick(false);
+    setIsEnabled((prev) => !prev);
 
-    if (click) {
-      setIsEnabled((prev) => !prev);
-
-      EventRegister.emit('changeTheme', isEnabled);
-    }
-
-    setTimeout(() => {
-      setClick(true);
-    }, 2000);
-  }, [isEnabled, click]);
+    EventRegister.emit('changeTheme', isEnabled);
+  }, [isEnabled]);
 
   return (
     <Container>
