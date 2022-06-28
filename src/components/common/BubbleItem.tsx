@@ -104,7 +104,10 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
 
   const containerToPreviousStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
     return {
-      right: { borderTopRightRadius: 2, marginTop: -2 },
+      right: {
+        borderTopRightRadius: 2,
+        marginTop: -2,
+      },
     };
   }, []);
 

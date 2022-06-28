@@ -1,5 +1,13 @@
-import { memo, ReactNode, useCallback, useEffect, useState } from 'react';
+import {
+  memo,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { Image } from 'react-native';
+import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 import {
   GiftedChat,
@@ -9,6 +17,7 @@ import {
   MessageImageProps,
 } from 'react-native-gifted-chat';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import {
   MemoScreenNavigationProp,
@@ -19,6 +28,10 @@ import { BubbleItem, DayHeader, IconHeader } from '../../../components/common';
 import { memoSampleData } from '../../../api/sampleData';
 import { ScreenContainer } from '../../../components/layout';
 
+const Container = styled.View({
+  flex: 1,
+});
+
 const Room = () => {
   const theme = useTheme();
 
@@ -28,6 +41,8 @@ const Room = () => {
   const { params } = useRoute<MemoScreenRouteProp>();
 
   const navigation = useNavigation<MemoScreenNavigationProp>();
+
+  const initialInsets = useMemo(() => -(getStatusBarHeight() * 2), []);
 
   useEffect(() => {
     if (params) {
@@ -89,7 +104,7 @@ const Room = () => {
   );
 
   return (
-    <ScreenContainer>
+    <Container>
       <IconHeader
         onBackPress={onBackPress}
         title={
@@ -98,23 +113,25 @@ const Room = () => {
             : `${entity?.title.substring(0, 15)}...`
         }
         backIcon
-        marginBottom={-30}
+        marginBottom={initialInsets}
         one={theme.icon.more}
         onOnePress={onPressMore}
       />
 
-      <GiftedChat
-        alignTop
-        scrollToBottom
-        messages={messages}
-        renderBubble={renderBubble}
-        keyboardShouldPersistTaps="handled"
-        renderDay={renderDay}
-        renderMessageImage={renderMessageImage}
-        onSend={(messages) => onSend(messages)}
-        user={{ _id: 1 }}
-      />
-    </ScreenContainer>
+      <ScreenContainer>
+        <GiftedChat
+          alignTop
+          scrollToBottom
+          messages={messages}
+          renderBubble={renderBubble}
+          keyboardShouldPersistTaps="handled"
+          renderDay={renderDay}
+          renderMessageImage={renderMessageImage}
+          onSend={(messages) => onSend(messages)}
+          user={{ _id: 1 }}
+        />
+      </ScreenContainer>
+    </Container>
   );
 };
 
