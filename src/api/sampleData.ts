@@ -1,3 +1,5 @@
+import { base64Image } from './base64';
+
 export const sample = [
   {
     roomId: 1,
@@ -278,5 +280,111 @@ export const CARD_DATA = [
     title: 'title10',
     lastMemo: 'sajegklasasejg',
     date: '2022-07-08',
+  },
+];
+
+/**
+ *
+ *   const [uid, setUid] = useState('');
+ *
+ *
+ *   useEffect(() => {
+    if (params) {
+      setEntity(params);
+    }
+  }, [params, entity]);
+
+  useEffect(() => {
+    const user = getAuth().currentUser;
+
+    if (user) {
+      setUid(user.uid);
+    }
+  }, [params]);
+ *
+ */
+
+export const memoSampleData = [
+  {
+    _id: 1,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+    received: true,
+    image: base64Image,
+  },
+  {
+    _id: 2,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+  {
+    _id: 3,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+  {
+    _id: 4,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+  {
+    _id: 5,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+  {
+    _id: 6,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+  {
+    _id: 7,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+  {
+    _id: 8,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+  {
+    _id: 9,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+  {
+    _id: 10,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
   },
 ];

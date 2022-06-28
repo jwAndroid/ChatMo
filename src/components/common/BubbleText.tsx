@@ -6,6 +6,7 @@ import StyledText from './StyledText';
 
 const Container = styled.View(() => ({
   paddingVertical: 3,
+  alignItems: 'flex-end',
 }));
 
 interface IBubbleItem {

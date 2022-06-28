@@ -1,15 +1,14 @@
 import { memo, ReactNode, useCallback, useEffect, useState } from 'react';
-import { Keyboard } from 'react-native';
+import { Image } from 'react-native';
 import { useTheme } from '@emotion/react';
-import styled from '@emotion/native';
 import {
   GiftedChat,
   IMessage,
   BubbleProps,
   DayProps,
+  MessageImageProps,
 } from 'react-native-gifted-chat';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { getAuth } from 'firebase/auth';
 
 import {
   MemoScreenNavigationProp,
@@ -17,18 +16,14 @@ import {
 } from '../../stacks/MemoStack';
 import { RoomEntity } from '../../../entity';
 import { BubbleItem, DayHeader, IconHeader } from '../../../components/common';
-
-const Container = styled.Pressable(({ theme }) => ({
-  flex: 1,
-  backgroundColor: theme.color.background,
-}));
+import { memoSampleData } from '../../../api/sampleData';
+import { ScreenContainer } from '../../../components/layout';
 
 const Room = () => {
   const theme = useTheme();
 
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [entity, setEntity] = useState<RoomEntity>();
-  const [uid, setUid] = useState('');
 
   const { params } = useRoute<MemoScreenRouteProp>();
 
@@ -41,26 +36,8 @@ const Room = () => {
   }, [params, entity]);
 
   useEffect(() => {
-    const user = getAuth().currentUser;
-
-    if (user) {
-      setUid(user.uid);
-    }
-  }, [params]);
-
-  useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: uid,
-        },
-        received: true,
-      },
-    ]);
-  }, [uid]);
+    setMessages(memoSampleData);
+  }, []);
 
   const onSend = useCallback((messages = []) => {
     setMessages((prev) => GiftedChat.append(prev, messages));
@@ -99,12 +76,20 @@ const Room = () => {
     []
   );
 
-  const onPressContainer = useCallback(() => {
-    Keyboard.dismiss();
-  }, []);
+  const renderMessageImage = useCallback(
+    (props: MessageImageProps<IMessage>) => {
+      return (
+        <Image
+          style={{ width: '100%', height: 80, resizeMode: 'center' }}
+          source={{ uri: props.currentMessage?.image }}
+        />
+      );
+    },
+    []
+  );
 
   return (
-    <Container onPress={onPressContainer}>
+    <ScreenContainer>
       <IconHeader
         onBackPress={onBackPress}
         title={
@@ -125,10 +110,11 @@ const Room = () => {
         renderBubble={renderBubble}
         keyboardShouldPersistTaps="handled"
         renderDay={renderDay}
+        renderMessageImage={renderMessageImage}
         onSend={(messages) => onSend(messages)}
-        user={{ _id: uid }}
+        user={{ _id: 1 }}
       />
-    </Container>
+    </ScreenContainer>
   );
 };
 

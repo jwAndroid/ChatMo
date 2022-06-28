@@ -33,7 +33,7 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
   const wrapperStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
     return {
       right: {
-        paddingLeft: 15,
+        paddingLeft: 10,
         paddingRight: 10,
         paddingVertical: 3,
         backgroundColor: theme.color.item.bubble,
@@ -87,7 +87,7 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
 
   const renderTicks = useCallback(
     (currentMessage: IMessage & Readonly<{ children?: ReactNode }>) => {
-      return currentMessage.received ? <BubbleTicks /> : <></>;
+      return currentMessage.received && <BubbleTicks />;
     },
     []
   );
