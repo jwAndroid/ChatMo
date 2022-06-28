@@ -1,4 +1,5 @@
 import { memo, ReactNode, useCallback, useEffect, useState } from 'react';
+import { Keyboard } from 'react-native';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
 import {
@@ -17,7 +18,7 @@ import {
 import { RoomEntity } from '../../../entity';
 import { BubbleItem, DayHeader, IconHeader } from '../../../components/common';
 
-const Container = styled.View(({ theme }) => ({
+const Container = styled.Pressable(({ theme }) => ({
   flex: 1,
   backgroundColor: theme.color.background,
 }));
@@ -98,8 +99,12 @@ const Room = () => {
     []
   );
 
+  const onPressContainer = useCallback(() => {
+    Keyboard.dismiss();
+  }, []);
+
   return (
-    <Container>
+    <Container onPress={onPressContainer}>
       <IconHeader
         onBackPress={onBackPress}
         title={
@@ -115,6 +120,7 @@ const Room = () => {
 
       <GiftedChat
         alignTop
+        scrollToBottom
         messages={messages}
         renderBubble={renderBubble}
         keyboardShouldPersistTaps="handled"

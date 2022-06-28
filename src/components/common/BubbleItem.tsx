@@ -1,6 +1,6 @@
 import { FC, memo, ReactNode, useCallback, useMemo } from 'react';
 import { useTheme } from '@emotion/react';
-import { Text, TextStyle, View, ViewStyle } from 'react-native';
+import { TextStyle, ViewStyle } from 'react-native';
 import {
   Bubble,
   BubbleProps,
@@ -11,6 +11,7 @@ import {
   TimeProps,
 } from 'react-native-gifted-chat';
 import BubbleText from './BubbleText';
+import BubbleTicks from './BubbleTicks';
 
 interface IBubbleItem {
   props: Readonly<BubbleProps<IMessage>> & Readonly<{ children?: ReactNode }>;
@@ -23,6 +24,7 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
   const containerStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
     return {
       right: {
+        flex: 1,
         marginVertical: 5,
       },
     };
@@ -32,7 +34,7 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
     return {
       right: {
         paddingLeft: 15,
-        paddingRight: 15,
+        paddingRight: 10,
         paddingVertical: 3,
         backgroundColor: theme.color.item.bubble,
       },
@@ -43,7 +45,6 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
     return {
       right: {
         alignItems: 'center',
-        backgroundColor: 'gray',
         marginBottom: 3,
       },
     };
@@ -52,10 +53,9 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
   const timeTextStyle = useMemo<LeftRightStyle<TextStyle>>(() => {
     return {
       right: {
-        fontSize: 10,
-        color: '#000',
+        fontSize: 9,
+        color: theme.color.white,
         includeFontPadding: false,
-        fontFamily: theme.font.YoonGothicRegular,
       },
     };
   }, [theme]);
@@ -63,10 +63,8 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
   const timeContainerStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
     return {
       right: {
-        flex: 1,
         marginBottom: 1,
         marginRight: 1,
-        backgroundColor: 'yellow',
       },
     };
   }, []);
@@ -89,13 +87,7 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
 
   const renderTicks = useCallback(
     (currentMessage: IMessage & Readonly<{ children?: ReactNode }>) => {
-      return (
-        currentMessage.received && (
-          <View style={{ backgroundColor: 'blue' }}>
-            <Text style={{ color: 'red', marginBottom: 2 }}>c</Text>
-          </View>
-        )
-      );
+      return currentMessage.received ? <BubbleTicks /> : <></>;
     },
     []
   );

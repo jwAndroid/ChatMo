@@ -8,6 +8,7 @@ export const font = {
 export const icon = {
   back_arrow_black: require('../assets/icons/back_arrow_black.png'),
   back_arrow_white: require('../assets/icons/back_arrow_white.png'),
+  bubble_check: require('../assets/icons/bubble_check.png'),
   circle_x: require('../assets/icons/circle_x.png'),
   delete: require('../assets/icons/delete.png'),
   edit: require('../assets/icons/edit.png'),

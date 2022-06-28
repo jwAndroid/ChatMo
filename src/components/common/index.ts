@@ -1,5 +1,6 @@
 export { default as BubbleItem } from './BubbleItem';
 export { default as BubbleText } from './BubbleText';
+export { default as BubbleTicks } from './BubbleTicks';
 export { default as ButtonModal } from './ButtonModal';
 export { default as Card } from './Card';
 export { default as DayHeader } from './DayHeader';
