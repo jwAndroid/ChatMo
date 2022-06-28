@@ -12,6 +12,7 @@ import { APP_THEME_KEY } from './src/api/constants';
 
 const App = () => {
   const [theme, setTheme] = useState(lightTheme);
+  // test
 
   useEffect(() => {
     EventRegister.addEventListener('changeTheme', (data) => {
