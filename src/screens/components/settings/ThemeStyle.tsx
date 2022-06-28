@@ -1,13 +1,13 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Switch } from 'react-native';
+// import { Switch } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EventRegister } from 'react-native-event-listeners';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
-import { IconHeader, StyledText } from '../../../components/common';
+import { IconHeader, StyledText, Switch } from '../../../components/common';
 import { APP_THEME_KEY } from '../../../api/constants';
 
 const Container = styled.View(({ theme }) => ({
@@ -27,13 +27,16 @@ const ThemeStyle = () => {
   const theme = useTheme();
 
   const [isEnabled, setIsEnabled] = useState(false);
+  const [click, setClick] = useState(true);
 
   const navigation = useNavigation<SettingScreenNavigationProp>();
 
   useEffect(() => {
-    navigation.addListener('beforeRemove', async () => {
+    const unsubscribe = navigation.addListener('beforeRemove', async () => {
       await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
     });
+
+    return unsubscribe;
   }, [navigation, isEnabled]);
 
   useEffect(() => {
@@ -51,10 +54,18 @@ const ThemeStyle = () => {
   }, [navigation, isEnabled]);
 
   const onValueChange = useCallback(() => {
-    setIsEnabled((prev) => !prev);
+    setClick(false);
 
-    EventRegister.emit('changeTheme', isEnabled);
-  }, [isEnabled]);
+    if (click) {
+      setIsEnabled((prev) => !prev);
+
+      EventRegister.emit('changeTheme', isEnabled);
+    }
+
+    setTimeout(() => {
+      setClick(true);
+    }, 2000);
+  }, [isEnabled, click]);
 
   return (
     <Container>
@@ -74,13 +85,7 @@ const ThemeStyle = () => {
           {isEnabled ? '화이트모드 활성화' : '다크모드 활성화'}
         </StyledText>
 
-        <Switch
-          trackColor={{ false: '#767577', true: '#767577' }}
-          thumbColor={isEnabled ? '#529EF4' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={onValueChange}
-          value={isEnabled}
-        />
+        <Switch size={30} onValueChange={onValueChange} isActive={isEnabled} />
       </ContentsContainer>
     </Container>
   );

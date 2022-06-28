@@ -13,4 +13,5 @@ export { default as MainHeader } from './MainHeader';
 export { default as MemoItem } from './MemoItem';
 export { default as SettingItem } from './SettingItem';
 export { default as StyledText } from './StyledText';
+export { default as Switch } from './Switch';
 export { default as TextModal } from './TextModal';
