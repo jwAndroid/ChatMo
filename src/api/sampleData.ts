@@ -369,3 +369,22 @@ export const memoSampleData = [
     },
   },
 ];
+
+export const messageData = [
+  {
+    _id: 1,
+    text: 'Hello developer',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+  {
+    _id: 2,
+    text: 'Hello developer2',
+    createdAt: new Date(),
+    user: {
+      _id: 1,
+    },
+  },
+];

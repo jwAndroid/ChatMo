@@ -10,15 +10,21 @@ import {
   Time,
   TimeProps,
 } from 'react-native-gifted-chat';
+
 import BubbleText from './BubbleText';
 import BubbleTicks from './BubbleTicks';
 
 interface IBubbleItem {
   props: Readonly<BubbleProps<IMessage>> & Readonly<{ children?: ReactNode }>;
   onPressBubble: (context?: any, message?: any) => void;
+  onLongPressBubble: (context?: any, message?: any) => void;
 }
 
-const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
+const BubbleItem: FC<IBubbleItem> = ({
+  props,
+  onPressBubble,
+  onLongPressBubble,
+}) => {
   const theme = useTheme();
 
   const containerStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
@@ -106,7 +112,7 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
     return {
       right: {
         borderTopRightRadius: 2,
-        marginTop: -2,
+        marginTop: -5,
       },
     };
   }, []);
@@ -128,6 +134,7 @@ const BubbleItem: FC<IBubbleItem> = ({ props, onPressBubble }) => {
       renderMessageText={renderMessageText}
       containerToPreviousStyle={containerToPreviousStyle}
       containerToNextStyle={containerToNextStyle}
+      onLongPress={onLongPressBubble}
       onPress={onPressBubble}
     />
   );

@@ -23,7 +23,7 @@ import {
 } from '../../stacks/MemoStack';
 import { RoomEntity } from '../../../entity';
 import { BubbleItem, DayHeader, IconHeader } from '../../../components/common';
-import { memoSampleData } from '../../../api/sampleData';
+import { messageData } from '../../../api/sampleData';
 import { ScreenContainer } from '../../../components/layout';
 
 const Container = styled.View({
@@ -49,7 +49,7 @@ const Room = () => {
   }, [params, entity]);
 
   useEffect(() => {
-    setMessages(memoSampleData);
+    setMessages(messageData);
   }, []);
 
   const onSend = useCallback((messages = []) => {
@@ -66,6 +66,16 @@ const Room = () => {
 
   const onPressBubble = useCallback((_, message) => {
     if (message) {
+      // setIsLongPress(false);
+
+      console.log(message);
+    }
+  }, []);
+
+  const onLongPressBubble = useCallback((_, message) => {
+    if (message) {
+      // setIsLongPress(true);
+
       console.log(message);
     }
   }, []);
@@ -75,9 +85,15 @@ const Room = () => {
       props: Readonly<BubbleProps<IMessage>> &
         Readonly<{ children?: ReactNode }>
     ) => {
-      return <BubbleItem props={props} onPressBubble={onPressBubble} />;
+      return (
+        <BubbleItem
+          props={props}
+          onPressBubble={onPressBubble}
+          onLongPressBubble={onLongPressBubble}
+        />
+      );
     },
-    [onPressBubble]
+    [onPressBubble, onLongPressBubble]
   );
 
   const renderDay = useCallback(

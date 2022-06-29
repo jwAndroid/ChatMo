@@ -1,5 +1,11 @@
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { StyleProp, ViewStyle, ListRenderItem, Pressable } from 'react-native';
+import {
+  StyleProp,
+  ViewStyle,
+  ListRenderItem,
+  Pressable,
+  Text,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from '@emotion/native';
@@ -231,6 +237,10 @@ const Memo = () => {
     return <Footer />;
   }, []);
 
+  const ListEmptyComponent = useCallback(() => {
+    return data.length === 0 ? <Text>결과가 존재하지 않습니다.</Text> : null;
+  }, [data]);
+
   return (
     <Container>
       <MainHeader title="List" />
@@ -241,6 +251,7 @@ const Memo = () => {
         stickySectionHeadersEnabled={false}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
+        ListEmptyComponent={ListEmptyComponent}
         renderHiddenItem={renderHiddenItem}
         ListHeaderComponent={listHeaderComponent}
         ListFooterComponent={listFooterComponent}

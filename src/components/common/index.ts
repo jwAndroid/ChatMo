@@ -1,3 +1,4 @@
+export { default as BottomModal } from './BottomModal';
 export { default as BubbleItem } from './BubbleItem';
 export { default as BubbleText } from './BubbleText';
 export { default as BubbleTicks } from './BubbleTicks';
