@@ -1,6 +1,6 @@
-import { FC, memo, ReactNode, useCallback, useMemo } from 'react';
+import { FC, memo, ReactNode, useCallback, useMemo, useState } from 'react';
 import { useTheme } from '@emotion/react';
-import { TextStyle, ViewStyle } from 'react-native';
+import { TextStyle, View, ViewStyle } from 'react-native';
 import {
   Bubble,
   BubbleProps,
@@ -13,19 +13,16 @@ import {
 
 import BubbleText from './BubbleText';
 import BubbleTicks from './BubbleTicks';
+import BottomModal from './BottomModal';
 
 interface IBubbleItem {
   props: Readonly<BubbleProps<IMessage>> & Readonly<{ children?: ReactNode }>;
-  onPressBubble: (context?: any, message?: any) => void;
-  onLongPressBubble: (context?: any, message?: any) => void;
 }
 
-const BubbleItem: FC<IBubbleItem> = ({
-  props,
-  onPressBubble,
-  onLongPressBubble,
-}) => {
+const BubbleItem: FC<IBubbleItem> = ({ props }) => {
   const theme = useTheme();
+
+  const [isModal, setIsModal] = useState(false);
 
   const containerStyle = useMemo<LeftRightStyle<ViewStyle>>(() => {
     return {
@@ -123,20 +120,46 @@ const BubbleItem: FC<IBubbleItem> = ({
     };
   }, []);
 
+  const onPressBubble = useCallback((_, message) => {
+    if (message) {
+      console.log(message);
+    }
+  }, []);
+
+  const onLongPressBubble = useCallback((_, message) => {
+    if (message) {
+      setIsModal(true);
+
+      console.log(message);
+    }
+  }, []);
+
+  const onPressContainer = useCallback(() => {
+    setIsModal(false);
+  }, []);
+
   return (
-    <Bubble
-      {...props}
-      containerStyle={containerStyle}
-      wrapperStyle={wrapperStyle}
-      bottomContainerStyle={bottomContainerStyle}
-      renderTicks={renderTicks}
-      renderTime={renderTime}
-      renderMessageText={renderMessageText}
-      containerToPreviousStyle={containerToPreviousStyle}
-      containerToNextStyle={containerToNextStyle}
-      onLongPress={onLongPressBubble}
-      onPress={onPressBubble}
-    />
+    <View>
+      <Bubble
+        {...props}
+        containerStyle={containerStyle}
+        wrapperStyle={wrapperStyle}
+        bottomContainerStyle={bottomContainerStyle}
+        renderTicks={renderTicks}
+        renderTime={renderTime}
+        renderMessageText={renderMessageText}
+        containerToPreviousStyle={containerToPreviousStyle}
+        containerToNextStyle={containerToNextStyle}
+        onLongPress={onLongPressBubble}
+        onPress={onPressBubble}
+      />
+
+      <BottomModal
+        isOpen={isModal}
+        onPress={onPressContainer}
+        message={props.currentMessage}
+      />
+    </View>
   );
 };
 

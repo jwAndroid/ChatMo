@@ -21,6 +21,7 @@ import {
   MemoScreenNavigationProp,
   MemoScreenRouteProp,
 } from '../../stacks/MemoStack';
+
 import { RoomEntity } from '../../../entity';
 import { BubbleItem, DayHeader, IconHeader } from '../../../components/common';
 import { messageData } from '../../../api/sampleData';
@@ -64,36 +65,14 @@ const Room = () => {
     console.log('more');
   }, []);
 
-  const onPressBubble = useCallback((_, message) => {
-    if (message) {
-      // setIsLongPress(false);
-
-      console.log(message);
-    }
-  }, []);
-
-  const onLongPressBubble = useCallback((_, message) => {
-    if (message) {
-      // setIsLongPress(true);
-
-      console.log(message);
-    }
-  }, []);
-
   const renderBubble = useCallback(
     (
       props: Readonly<BubbleProps<IMessage>> &
         Readonly<{ children?: ReactNode }>
     ) => {
-      return (
-        <BubbleItem
-          props={props}
-          onPressBubble={onPressBubble}
-          onLongPressBubble={onLongPressBubble}
-        />
-      );
+      return <BubbleItem props={props} />;
     },
-    [onPressBubble, onLongPressBubble]
+    []
   );
 
   const renderDay = useCallback(
