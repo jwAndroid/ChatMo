@@ -6,7 +6,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { Image } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 import {
@@ -14,7 +13,6 @@ import {
   IMessage,
   BubbleProps,
   DayProps,
-  MessageImageProps,
 } from 'react-native-gifted-chat';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
@@ -91,18 +89,6 @@ const Room = () => {
     []
   );
 
-  const renderMessageImage = useCallback(
-    (props: MessageImageProps<IMessage>) => {
-      return (
-        <Image
-          style={{ width: '100%', height: 80, resizeMode: 'center' }}
-          source={{ uri: props.currentMessage?.image }}
-        />
-      );
-    },
-    []
-  );
-
   return (
     <Container>
       <IconHeader
@@ -126,7 +112,6 @@ const Room = () => {
           renderBubble={renderBubble}
           keyboardShouldPersistTaps="handled"
           renderDay={renderDay}
-          renderMessageImage={renderMessageImage}
           onSend={(messages) => onSend(messages)}
           user={{ _id: 1 }}
         />

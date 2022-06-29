@@ -1,4 +1,5 @@
 import { base64Image } from './base64';
+import { base64Image2 } from './base64_2';
 
 export const sample = [
   {
@@ -283,27 +284,6 @@ export const CARD_DATA = [
   },
 ];
 
-/**
- *
- *   const [uid, setUid] = useState('');
- *
- *
- *   useEffect(() => {
-    if (params) {
-      setEntity(params);
-    }
-  }, [params, entity]);
-
-  useEffect(() => {
-    const user = getAuth().currentUser;
-
-    if (user) {
-      setUid(user.uid);
-    }
-  }, [params]);
- *
- */
-
 export const memoSampleData = [
   {
     _id: 1,
@@ -322,6 +302,7 @@ export const memoSampleData = [
     user: {
       _id: 1,
     },
+    image: base64Image2,
   },
   {
     _id: 3,
