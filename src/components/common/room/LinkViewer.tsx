@@ -7,7 +7,8 @@ import {
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
-import StyledText from './StyledText';
+import { StyledText } from '../text';
+import { ellipsize } from '../../../api/utils/ellipsize';
 
 const DescriptionContainer = styled.View({
   justifyContent: 'center',
@@ -45,7 +46,7 @@ const LinkViewer: FC<ILinkViewer> = ({ link }) => {
     (text: string) => {
       return text ? (
         <StyledText color={theme.color.white} fontSize={13}>
-          {text.length < 30 ? text : `${text.substring(0, 30)}...`}
+          {ellipsize(text, 30)}
         </StyledText>
       ) : (
         <View />
@@ -58,7 +59,7 @@ const LinkViewer: FC<ILinkViewer> = ({ link }) => {
     (title: string) => {
       return title ? (
         <StyledText color={theme.color.white} fontSize={12} isBlod>
-          {title.length < 7 ? title : `${title.substring(0, 7)}...`}
+          {ellipsize(title, 7)}
         </StyledText>
       ) : (
         <View />
@@ -76,9 +77,7 @@ const LinkViewer: FC<ILinkViewer> = ({ link }) => {
       return description ? (
         <DescriptionContainer>
           <StyledText color={theme.color.white} fontSize={10}>
-            {description.length < 10
-              ? description
-              : `${description.substring(0, 10)}...`}
+            {ellipsize(description, 10)}
           </StyledText>
         </DescriptionContainer>
       ) : (

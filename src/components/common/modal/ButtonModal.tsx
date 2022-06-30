@@ -2,8 +2,8 @@ import React, { FC, memo } from 'react';
 import { GestureResponderEvent, Modal } from 'react-native';
 import styled from '@emotion/native';
 
-import Divider from './Divider';
-import StyledText from './StyledText';
+import { Divider } from '../item';
+import { StyledText } from '../text';
 
 const Container = styled.Pressable({
   flex: 1,

@@ -3,8 +3,9 @@ import { FlatList, GestureResponderEvent, Pressable, View } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
-import { chipData } from '../../api/sampleData';
-import StyledText from './StyledText';
+import { StyledText } from '../text';
+import { ellipsize } from '../../../api/utils/ellipsize';
+import { chipData } from '../../../api/sample/sampleData';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -65,9 +66,7 @@ const Chip: FC<IFavoritChip> = ({ onPressChipContents, onPressChipDelete }) => {
               isBlod
               onPress={onPressChipContents(item)}
             >
-              {String(item.title).length < 15
-                ? `${String(item.title)}`
-                : `${String(item.title).substring(0, 15)}...`}
+              {ellipsize(item.title, 15)}
             </StyledText>
           </ContentsContainer>
 

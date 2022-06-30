@@ -21,10 +21,12 @@ import {
   MemoScreenNavigationProp,
   MemoScreenRouteProp,
 } from '../../stacks/MemoStack';
-import { RoomEntity } from '../../../entity';
-import { BubbleItem, DayHeader, IconHeader } from '../../../components/common';
-import { messageData } from '../../../api/sampleData';
+
+import { BubbleItem, DayHeader } from '../../../components/common/room';
+import { IconHeader } from '../../../components/common/header';
 import { ScreenContainer } from '../../../components/layout';
+import { RoomEntity } from '../../../model';
+import { messageData } from '../../../api/sample/sampleData';
 
 const Container = styled.View({
   flex: 1,
@@ -109,11 +111,7 @@ const Room = () => {
     <Container>
       <IconHeader
         onBackPress={onBackPress}
-        title={
-          entity?.title!! && entity.title.length < 15
-            ? entity?.title
-            : `${entity?.title.substring(0, 15)}...`
-        }
+        title={entity?.title}
         backIcon
         marginBottom={initialInsets}
         one={theme.icon.more}
