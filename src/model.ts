@@ -13,3 +13,22 @@ export interface RoomEntity {
   updatedAt: number;
   lastUpdateOn: number;
 }
+
+export interface ImageEntity {
+  uri: string;
+}
+
+export interface MessageEntity {
+  id: number;
+  message?: string;
+  image?: ImageEntity[];
+  status: number;
+  day: string;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface IMessageEntity {
+  data: MessageEntity[];
+  title: string;
+}
