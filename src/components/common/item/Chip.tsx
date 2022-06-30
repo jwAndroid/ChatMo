@@ -4,7 +4,7 @@ import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 import { StyledText } from '../text';
-import { chipData } from '../../../api/sample/sampleData';
+import { chips } from '../../../api/sample/sampleData';
 import { ellipsize } from '../../../api/utils/ellipsize';
 
 const Container = styled.View(({ theme }) => ({
@@ -94,7 +94,7 @@ const Chip: FC<IFavoritChip> = ({ onPressChipContents, onPressChipDelete }) => {
       </StyledText>
 
       <FlatList
-        data={chipData}
+        data={chips}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         horizontal

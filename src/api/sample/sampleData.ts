@@ -1,4 +1,4 @@
-export const sample = [
+export const list = [
   {
     roomId: 1,
     title:
@@ -205,7 +205,7 @@ export const sample = [
   },
 ];
 
-export const chipData = [
+export const chips = [
   { id: 1, title: 'title1asefasefsaef', date: '07-07' },
   { id: 2, title: 't', date: '07-08' },
   { id: 3, title: 'title3', date: '07-08' },

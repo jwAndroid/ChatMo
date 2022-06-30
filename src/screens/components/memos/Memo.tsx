@@ -16,7 +16,7 @@ import { Card, MemoItem } from '../../../components/common/item';
 import { MainHeader } from '../../../components/common/header';
 import { FloatingButton } from '../../../components/common/button';
 import { RoomEntity } from '../../../model';
-import { sample } from '../../../api/sample/sampleData';
+import { list } from '../../../api/sample/sampleData';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -47,7 +47,7 @@ const Memo = () => {
   const [data, setData] = useState<RoomEntity[]>([]);
 
   useEffect(() => {
-    setData(sample);
+    setData(list);
   }, []);
 
   const Row = useMemo<StyleProp<ViewStyle>>(
