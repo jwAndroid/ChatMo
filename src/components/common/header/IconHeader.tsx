@@ -1,10 +1,11 @@
-import { FC, memo, ReactNode, useMemo } from 'react';
+import { FC, memo, useMemo } from 'react';
 import { ImageSourcePropType, Platform, StatusBar } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import StyledText from '../text/StyledText';
+import { ellipsize } from '../../../api/utils/ellipsize';
 
 interface IHeaderContainer {
   insets: number | undefined;
@@ -49,7 +50,7 @@ const Icon = styled.Image(({ theme }) => ({
 }));
 
 interface IIconHeader {
-  title: ReactNode;
+  title?: string;
   backIcon?: boolean;
   marginBottom?: number;
   onBackPress?: () => void;
@@ -82,7 +83,7 @@ const IconHeader: FC<IIconHeader> = ({
       <CenterContainer>
         {title && (
           <StyledText isBlod fontSize={15} color={theme.color.text}>
-            {title}
+            {ellipsize(title, 10)}
           </StyledText>
         )}
       </CenterContainer>

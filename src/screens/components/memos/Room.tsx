@@ -28,18 +28,14 @@ const Room = () => {
     <View style={{ flex: 1 }}>
       <IconHeader
         onBackPress={() => navigation.goBack()}
-        title={
-          post?.title!! && post.title.length < 15
-            ? post?.title
-            : `${post?.title.substring(0, 15)}...`
-        }
+        title={post?.title}
         backIcon
         one={theme.icon.more}
         onOnePress={() => console.log('more')}
       />
 
       <StyledText color="white">
-        {ellipsize('sadfklasdfljaslkdfjlkasdjflkj', 5)}
+        {ellipsize('채팅방 재작업 실시', 5)}
       </StyledText>
     </View>
   );

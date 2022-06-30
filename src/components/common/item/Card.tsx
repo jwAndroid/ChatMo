@@ -89,7 +89,7 @@ const Card: FC<ICard> = ({ onPress, onStarPress }) => {
                 marginLeft={8}
                 isBlod
               >
-                {title.length < 10 ? title : `${title.substring(0, 10)}...`}
+                {ellipsize(title, 10)}
               </StyledText>
             </TitleContainer>
             <ContentsContainer>
