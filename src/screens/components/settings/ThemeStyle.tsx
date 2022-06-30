@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 import { useNavigation } from '@react-navigation/native';
@@ -31,19 +31,19 @@ const ThemeStyle = () => {
 
   const navigation = useNavigation<SettingScreenNavigationProp>();
 
-  useEffect(() => {
-    navigation.addListener('beforeRemove', async () => {
-      await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
-    });
-  }, [navigation, isEnabled]);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     (async () => {
       const storage = await AsyncStorage.getItem(APP_THEME_KEY);
 
       setIsEnabled(storage === 'dark' ? true : false);
     })();
   }, []);
+
+  useEffect(() => {
+    navigation.addListener('beforeRemove', async () => {
+      await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');
+    });
+  }, [navigation, isEnabled]);
 
   const backOnPress = useCallback(async () => {
     await AsyncStorage.setItem(APP_THEME_KEY, isEnabled ? 'dark' : 'white');

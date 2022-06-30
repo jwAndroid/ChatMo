@@ -55,6 +55,7 @@ declare module '@emotion/react' {
         card_background: string;
         arrow: string;
         bubble: string;
+        time: string;
       };
     };
     icon: typeof icon;

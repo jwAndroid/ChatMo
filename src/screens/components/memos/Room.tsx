@@ -1,11 +1,5 @@
 import { memo, useCallback, useEffect, useState } from 'react';
-import {
-  ListRenderItem,
-  SectionList,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { ListRenderItem, SectionList, TextInput, View } from 'react-native';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -19,15 +13,21 @@ import { IconHeader } from '../../../components/common/header';
 import { IMessageEntity, MessageEntity, RoomEntity } from '../../../model';
 import { messages } from '../../../api/sample/sampleData';
 import { groupBy } from '../../../api/utils/groupBy';
-import { DayHeader } from '../../../components/room';
+import { Bubble, DayHeader } from '../../../components/room';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
   backgroundColor: theme.color.background,
 }));
 
+const MessageContainer = styled.View(() => ({
+  flex: 1,
+  alignItems: 'flex-end',
+}));
+
 const DayContainer = styled.View(() => ({
   flex: 1,
+  paddingTop: 5,
   alignItems: 'center',
 }));
 
@@ -65,11 +65,9 @@ const Room = () => {
 
   const renderItem = useCallback<ListRenderItem<MessageEntity>>(({ item }) => {
     return (
-      <View
-        style={{ flex: 1, alignItems: 'flex-end', backgroundColor: 'gray' }}
-      >
-        <Text style={{ color: 'white' }}>{item.message}</Text>
-      </View>
+      <MessageContainer>
+        {item.status === -1 ? undefined : <Bubble item={item} />}
+      </MessageContainer>
     );
   }, []);
 
@@ -103,6 +101,7 @@ const Room = () => {
         sections={message}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
         renderSectionHeader={renderSectionHeader}
       />
 
