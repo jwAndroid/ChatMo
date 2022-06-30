@@ -8,7 +8,7 @@ import {
 import { useTheme } from '@emotion/react';
 
 import { Statistics } from '../components/statistic';
-import { RoomEntity } from '../../entity';
+import { RoomEntity } from '../../model';
 import { Room } from '../components/memos';
 
 type RootStackParamList = {

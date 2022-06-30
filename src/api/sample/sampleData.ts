@@ -1,6 +1,3 @@
-import { base64Image } from './base64';
-import { base64Image2 } from './base64_2';
-
 export const sample = [
   {
     roomId: 1,
@@ -221,7 +218,7 @@ export const chipData = [
   { id: 10, title: 'title10', date: '07-08' },
 ];
 
-export const CARD_DATA = [
+export const cards = [
   {
     id: 1,
     title: '안녕하세요오오오오오오',
@@ -281,110 +278,5 @@ export const CARD_DATA = [
     title: 'title10',
     lastMemo: 'sajegklasasejg',
     date: '2022-07-08',
-  },
-];
-
-export const memoSampleData = [
-  {
-    _id: 1,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-    received: true,
-    image: base64Image,
-  },
-  {
-    _id: 2,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-    image: base64Image2,
-  },
-  {
-    _id: 3,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-  },
-  {
-    _id: 4,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-  },
-  {
-    _id: 5,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-  },
-  {
-    _id: 6,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-  },
-  {
-    _id: 7,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-  },
-  {
-    _id: 8,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-  },
-  {
-    _id: 9,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-  },
-  {
-    _id: 10,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-  },
-];
-
-export const messageData = [
-  {
-    _id: 1,
-    text: 'Hello developer',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
-  },
-  {
-    _id: 2,
-    text: 'Hello developer2',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-    },
   },
 ];

@@ -1,10 +1,11 @@
 import { memo, useCallback, useMemo } from 'react';
 import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import styled from '@emotion/native';
+import { useNavigation } from '@react-navigation/native';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
-import { Divider, MainHeader, SettingItem } from '../../../components/common';
+import { Divider, SettingItem } from '../../../components/common/item';
+import { MainHeader } from '../../../components/common/header';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,

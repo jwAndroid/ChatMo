@@ -1,10 +1,10 @@
 import { memo, useCallback } from 'react';
-import styled from '@emotion/native';
 import { Text } from 'react-native';
+import styled from '@emotion/native';
 import { useNavigation } from '@react-navigation/native';
 
-import { MainHeader } from '../../../components/common';
 import { RoomScreenNavigationProp } from '../../stacks/StatisticsStack';
+import { MainHeader } from '../../../components/common/header';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,

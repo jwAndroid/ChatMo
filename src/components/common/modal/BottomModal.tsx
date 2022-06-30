@@ -2,7 +2,6 @@ import { FC, memo } from 'react';
 import styled from '@emotion/native';
 import { GestureResponderEvent, Modal, Text, View } from 'react-native';
 import { useTheme } from '@emotion/react';
-import { IMessage } from 'react-native-gifted-chat';
 
 const Container = styled.Pressable({
   flex: 1,
@@ -43,25 +42,17 @@ interface IBottomModal {
   isOpen: boolean;
   onPress: (event: GestureResponderEvent) => void;
   onPressCircle?: (event: GestureResponderEvent) => void;
-  message?: IMessage;
 }
 
-const BottomModal: FC<IBottomModal> = ({
-  isOpen,
-  onPress,
-  onPressCircle,
-  message,
-}) => {
+const BottomModal: FC<IBottomModal> = ({ isOpen, onPress, onPressCircle }) => {
   const theme = useTheme();
 
   return (
     <Modal transparent visible={isOpen} animationType="fade">
       <Container onPress={onPress}>
-        {message && (
-          <View style={{ width: '100%', height: 20, backgroundColor: 'gray' }}>
-            <Text>{message?.text}</Text>
-          </View>
-        )}
+        <View style={{ width: '100%', height: 20, backgroundColor: 'gray' }}>
+          <Text>메세지</Text>
+        </View>
 
         <Box>
           <Circle onPress={onPressCircle}>

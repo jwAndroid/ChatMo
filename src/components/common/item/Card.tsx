@@ -3,8 +3,9 @@ import { FlatList, Dimensions, GestureResponderEvent } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
-import StyledText from './StyledText';
-import { CARD_DATA } from '../../api/sampleData';
+import StyledText from '../text/StyledText';
+import { cards } from '../../../api/sample/sampleData';
+import { ellipsize } from '../../../api/utils/ellipsize';
 
 const { width } = Dimensions.get('screen');
 
@@ -98,9 +99,7 @@ const Card: FC<ICard> = ({ onPress, onStarPress }) => {
                   color={theme.color.gray_830}
                   marginLeft={8}
                 >
-                  {lastMemo.length < 20
-                    ? lastMemo
-                    : `${lastMemo.substring(0, 20)}...`}
+                  {ellipsize(lastMemo, 20)}
                 </StyledText>
 
                 <StyledText
@@ -126,7 +125,7 @@ const Card: FC<ICard> = ({ onPress, onStarPress }) => {
 
   return (
     <FlatList
-      data={CARD_DATA}
+      data={cards}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       horizontal

@@ -8,7 +8,7 @@ import { ThemeProvider } from '@emotion/react';
 
 import { lightTheme, darkTheme } from './src/theme';
 import { Splash } from './src/screens';
-import { APP_THEME_KEY } from './src/api/constants';
+import { APP_THEME_KEY } from './src/api/storageKey';
 
 const App = () => {
   const [theme, setTheme] = useState(lightTheme);

@@ -1,6 +1,3 @@
-export interface UserEntity {
-  id: number;
-}
 export interface RoomEntity {
   roomId: number;
   title: string;
@@ -15,7 +12,4 @@ export interface RoomEntity {
   createdAt: number;
   updatedAt: number;
   lastUpdateOn: number;
-}
-export interface Memontity {
-  text: string;
 }

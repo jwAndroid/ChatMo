@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/native';
 import { useTheme } from '@emotion/react';
 
-import BottmTab from './BottmTab';
+import BottmNavigation from './BottmNavigation';
 
 const Navigation = () => {
   const theme = useTheme();
@@ -29,7 +29,7 @@ const Navigation = () => {
 
   return (
     <NavigationContainer theme={navigationContainerTheme}>
-      <BottmTab />
+      <BottmNavigation />
     </NavigationContainer>
   );
 };

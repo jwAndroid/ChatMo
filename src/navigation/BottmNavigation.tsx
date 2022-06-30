@@ -12,7 +12,7 @@ import { MemosStack, StatisticsStack, SettingStack } from '../screens/stacks';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
-const BottmTab = () => {
+const BottmNavigation = () => {
   const insets = useSafeAreaInsets();
 
   const theme = useTheme();
@@ -131,4 +131,4 @@ const BottmTab = () => {
   );
 };
 
-export default memo(BottmTab);
+export default memo(BottmNavigation);

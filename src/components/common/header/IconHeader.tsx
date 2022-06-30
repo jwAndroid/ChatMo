@@ -4,7 +4,7 @@ import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-import StyledText from './StyledText';
+import StyledText from '../text/StyledText';
 
 interface IHeaderContainer {
   insets: number | undefined;

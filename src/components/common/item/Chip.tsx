@@ -3,8 +3,8 @@ import { FlatList, GestureResponderEvent, Pressable, View } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
-import { chipData } from '../../api/sampleData';
-import StyledText from './StyledText';
+import { StyledText } from '../text';
+import { chipData } from '../../../api/sample/sampleData';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,

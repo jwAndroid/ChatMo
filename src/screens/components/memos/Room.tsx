@@ -1,19 +1,6 @@
-import {
-  memo,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import styled from '@emotion/native';
+import { memo, useEffect, useMemo, useState } from 'react';
+import { View } from 'react-native';
 import { useTheme } from '@emotion/react';
-import {
-  GiftedChat,
-  IMessage,
-  BubbleProps,
-  DayProps,
-} from 'react-native-gifted-chat';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
@@ -21,97 +8,45 @@ import {
   MemoScreenNavigationProp,
   MemoScreenRouteProp,
 } from '../../stacks/MemoStack';
-
-import { RoomEntity } from '../../../entity';
-import { BubbleItem, DayHeader, IconHeader } from '../../../components/common';
-import { messageData } from '../../../api/sampleData';
 import { ScreenContainer } from '../../../components/layout';
-
-const Container = styled.View({
-  flex: 1,
-});
+import { IconHeader } from '../../../components/common/header';
+import { StyledText } from '../../../components/common/text';
+import { RoomEntity } from '../../../model';
+import { ellipsize } from '../../../api/utils/ellipsize';
 
 const Room = () => {
   const theme = useTheme();
 
-  const [messages, setMessages] = useState<IMessage[]>([]);
-  const [entity, setEntity] = useState<RoomEntity>();
-
   const { params } = useRoute<MemoScreenRouteProp>();
-
   const navigation = useNavigation<MemoScreenNavigationProp>();
 
-  const initialInsets = useMemo(() => -(getStatusBarHeight() * 2), []);
+  const [post, setPost] = useState<RoomEntity>();
+
+  const insets = useMemo(() => -(getStatusBarHeight() * 2), []);
 
   useEffect(() => {
-    if (params) {
-      setEntity(params);
-    }
-  }, [params, entity]);
-
-  useEffect(() => {
-    setMessages(messageData);
-  }, []);
-
-  const onSend = useCallback((messages = []) => {
-    setMessages((prev) => GiftedChat.append(prev, messages));
-  }, []);
-
-  const onBackPress = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
-
-  const onPressMore = useCallback(() => {
-    console.log('more');
-  }, []);
-
-  const renderBubble = useCallback(
-    (
-      props: Readonly<BubbleProps<IMessage>> &
-        Readonly<{ children?: ReactNode }>
-    ) => {
-      return <BubbleItem props={props} />;
-    },
-    []
-  );
-
-  const renderDay = useCallback(
-    (
-      props: Readonly<DayProps<IMessage>> & Readonly<{ children?: ReactNode }>
-    ) => {
-      return <DayHeader props={props} />;
-    },
-    []
-  );
+    setPost(params);
+  }, [params, post]);
 
   return (
-    <Container>
+    <View style={{ flex: 1 }}>
       <IconHeader
-        onBackPress={onBackPress}
+        onBackPress={() => navigation.goBack()}
         title={
-          entity?.title!! && entity.title.length < 15
-            ? entity?.title
-            : `${entity?.title.substring(0, 15)}...`
+          post?.title!! && post.title.length < 15
+            ? post?.title
+            : `${post?.title.substring(0, 15)}...`
         }
         backIcon
-        marginBottom={initialInsets}
+        marginBottom={insets}
         one={theme.icon.more}
-        onOnePress={onPressMore}
+        onOnePress={() => console.log('more')}
       />
 
       <ScreenContainer>
-        <GiftedChat
-          alignTop
-          scrollToBottom
-          messages={messages}
-          renderBubble={renderBubble}
-          keyboardShouldPersistTaps="handled"
-          renderDay={renderDay}
-          onSend={(messages) => onSend(messages)}
-          user={{ _id: 1 }}
-        />
+        <StyledText>{ellipsize('sadfklasdfljaslkdfjlkasdjflkj', 5)}</StyledText>
       </ScreenContainer>
-    </Container>
+    </View>
   );
 };
 

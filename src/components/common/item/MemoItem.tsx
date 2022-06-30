@@ -3,7 +3,7 @@ import { ImageSourcePropType } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
-import StyledText from './StyledText';
+import { StyledText } from '../text';
 
 const Container = styled.View(() => ({
   flex: 1,

@@ -17,4 +17,4 @@ web-build/
 firebase.ts
 
 # storage key
-constants.ts
+storageKey.ts
