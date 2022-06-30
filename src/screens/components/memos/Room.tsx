@@ -68,16 +68,12 @@ const Room = () => {
 
   const onPressBubble = useCallback((_, message) => {
     if (message) {
-      // setIsLongPress(false);
-
       console.log(message);
     }
   }, []);
 
   const onLongPressBubble = useCallback((_, message) => {
     if (message) {
-      // setIsLongPress(true);
-
       console.log(message);
     }
   }, []);
