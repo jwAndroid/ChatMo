@@ -19,11 +19,16 @@ import { IconHeader } from '../../../components/common/header';
 import { IMessageEntity, MessageEntity, RoomEntity } from '../../../model';
 import { messages } from '../../../api/sample/sampleData';
 import { groupBy } from '../../../api/utils/groupBy';
-import { ScreenContainer } from '../../../components/layout';
+import { DayHeader } from '../../../components/room';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
   backgroundColor: theme.color.background,
+}));
+
+const DayContainer = styled.View(() => ({
+  flex: 1,
+  alignItems: 'center',
 }));
 
 const Room = () => {
@@ -70,9 +75,9 @@ const Room = () => {
 
   const renderSectionHeader = useCallback(({ section }) => {
     return (
-      <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
-        <Text style={{ color: 'orange' }}>{section.title}</Text>
-      </View>
+      <DayContainer>
+        <DayHeader day={section.title} />
+      </DayContainer>
     );
   }, []);
 
@@ -94,14 +99,12 @@ const Room = () => {
         onOnePress={() => console.log('more')}
       />
 
-      <ScreenContainer>
-        <SectionList
-          sections={message}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          renderSectionHeader={renderSectionHeader}
-        />
-      </ScreenContainer>
+      <SectionList
+        sections={message}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
+      />
 
       <View
         style={{
