@@ -1,10 +1,11 @@
 import { FC, memo, ReactNode } from 'react';
 import { useTheme } from '@emotion/react';
-import { IMessage, MessageTextProps } from 'react-native-gifted-chat';
 import styled from '@emotion/native';
-import StyledText from './StyledText';
-import { regexUrl } from '../../api/regex';
+import { IMessage, MessageTextProps } from 'react-native-gifted-chat';
+
 import LinkViewer from './LinkViewer';
+import { regexUrl } from '../../../api/utils/regex';
+import { StyledText } from '../text';
 
 const Container = styled.View(() => ({
   paddingVertical: 3,

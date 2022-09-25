@@ -1,14 +1,14 @@
 import { memo, useMemo } from 'react';
+import { useTheme } from '@emotion/react';
 import { RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationOptions,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { useTheme } from '@emotion/react';
 
 import { Statistics } from '../components/statistic';
-import { RoomEntity } from '../../entity';
+import { RoomEntity } from '../../model';
 import { Room } from '../components/memos';
 
 type RootStackParamList = {

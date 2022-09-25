@@ -3,7 +3,8 @@ import { ImageSourcePropType } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
-import StyledText from './StyledText';
+import StyledText from '../text/StyledText';
+import { ellipsize } from '../../../api/utils/ellipsize';
 
 const Container = styled.View(() => ({
   flex: 1,
@@ -57,8 +58,8 @@ const Icon = styled.Image(({ theme }) => ({
 }));
 
 interface IMemoItem {
-  title: String;
-  lastMemo: String;
+  title: string;
+  lastMemo: string;
   date: number;
   count: number;
   isLock: boolean;
@@ -86,16 +87,14 @@ const MemoItem: FC<IMemoItem> = ({
       <ContentsContainer>
         <TitleContainer>
           <StyledText color={theme.color.text} fontSize={16} isBlod>
-            {title.length < 17 ? `${title}` : `${title.substring(0, 17)}...`}
+            {ellipsize(title, 17)}
           </StyledText>
 
           {isLock && <Icon source={theme.icon.lock} />}
         </TitleContainer>
 
         <StyledText fontSize={12} marginTop={3} color={theme.color.item.text}>
-          {lastMemo.length < 20
-            ? `${lastMemo}`
-            : `${lastMemo.substring(0, 20)}...`}
+          {ellipsize(lastMemo, 20)}
         </StyledText>
       </ContentsContainer>
 

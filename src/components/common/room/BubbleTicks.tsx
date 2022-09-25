@@ -1,6 +1,6 @@
+import { memo } from 'react';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
-import { memo } from 'react';
 
 const Container = styled.View(() => ({
   paddingLeft: 2,

@@ -5,7 +5,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
-import StyledText from './StyledText';
+import { StyledText } from '../text';
 
 interface IShadowContainer {
   inset: number | undefined;

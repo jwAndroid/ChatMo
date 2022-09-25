@@ -1,5 +1,5 @@
 import { FC, memo, useCallback, useMemo } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 import {
   LinkPreview,
   PreviewDataImage,
@@ -7,7 +7,8 @@ import {
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
-import StyledText from './StyledText';
+import { StyledText } from '../text';
+import { ellipsize } from '../../../api/utils/ellipsize';
 
 const DescriptionContainer = styled.View({
   justifyContent: 'center',
@@ -43,12 +44,12 @@ const LinkViewer: FC<ILinkViewer> = ({ link }) => {
 
   const renderText = useCallback(
     (text: string) => {
-      return text ? (
-        <StyledText color={theme.color.white} fontSize={13}>
-          {text.length < 30 ? text : `${text.substring(0, 30)}...`}
-        </StyledText>
-      ) : (
-        <View />
+      return (
+        text && (
+          <StyledText color={theme.color.white} fontSize={13}>
+            {ellipsize(text, 30)}
+          </StyledText>
+        )
       );
     },
     [theme.color.white]
@@ -56,12 +57,12 @@ const LinkViewer: FC<ILinkViewer> = ({ link }) => {
 
   const renderTitle = useCallback(
     (title: string) => {
-      return title ? (
-        <StyledText color={theme.color.white} fontSize={12} isBlod>
-          {title.length < 7 ? title : `${title.substring(0, 7)}...`}
-        </StyledText>
-      ) : (
-        <View />
+      return (
+        title && (
+          <StyledText color={theme.color.white} fontSize={12} isBlod>
+            {ellipsize(title, 7)}
+          </StyledText>
+        )
       );
     },
     [theme.color.white]
@@ -73,16 +74,14 @@ const LinkViewer: FC<ILinkViewer> = ({ link }) => {
 
   const renderDescription = useCallback(
     (description: string) => {
-      return description ? (
-        <DescriptionContainer>
-          <StyledText color={theme.color.white} fontSize={10}>
-            {description.length < 10
-              ? description
-              : `${description.substring(0, 10)}...`}
-          </StyledText>
-        </DescriptionContainer>
-      ) : (
-        <View />
+      return (
+        description && (
+          <DescriptionContainer>
+            <StyledText color={theme.color.white} fontSize={10}>
+              {ellipsize(description, 10)}
+            </StyledText>
+          </DescriptionContainer>
+        )
       );
     },
     [theme.color.white]

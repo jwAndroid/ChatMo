@@ -4,7 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import styled from '@emotion/native';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
-import { Divider, MainHeader, SettingItem } from '../../../components/common';
+import { SettingItem } from '../../../components/common/setting';
+import { Divider } from '../../../components/common/item';
+import { MainHeader } from '../../../components/common/header';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,

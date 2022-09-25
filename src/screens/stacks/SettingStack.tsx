@@ -1,11 +1,11 @@
 import { memo, useMemo } from 'react';
+import { useTheme } from '@emotion/react';
 import { RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationOptions,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { useTheme } from '@emotion/react';
 
 import { Setting, ThemeStyle } from '../components/settings';
 

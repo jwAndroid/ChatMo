@@ -2,7 +2,7 @@ import { FC, memo } from 'react';
 import { Pressable } from 'react-native';
 import { useTheme } from '@emotion/react';
 
-import StyledText from './StyledText';
+import StyledText from '../text/StyledText';
 
 interface ISettings {
   title: string;

@@ -1,14 +1,14 @@
 import { memo, useMemo } from 'react';
+import { useTheme } from '@emotion/react';
 import { RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationOptions,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { useTheme } from '@emotion/react';
 
 import { Memo, Room } from '../components/memos';
-import { RoomEntity } from '../../entity';
+import { RoomEntity } from '../../model';
 
 type RootStackParamList = {
   Memo: undefined;

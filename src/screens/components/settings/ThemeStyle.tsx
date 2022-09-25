@@ -1,13 +1,14 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-// import { Switch } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { EventRegister } from 'react-native-event-listeners';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { EventRegister } from 'react-native-event-listeners';
 
 import { SettingScreenNavigationProp } from '../../stacks/SettingStack';
-import { IconHeader, StyledText, Switch } from '../../../components/common';
+import { IconHeader } from '../../../components/common/header';
+import { StyledText } from '../../../components/common/text';
+import { Switch } from '../../../components/common/button';
 import { APP_THEME_KEY } from '../../../api/constants';
 
 const Container = styled.View(({ theme }) => ({

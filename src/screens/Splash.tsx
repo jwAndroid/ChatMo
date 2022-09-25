@@ -1,17 +1,17 @@
 import { memo, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { StatusBar } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { signInAnonymously } from 'firebase/auth';
-import NetInfo from '@react-native-community/netinfo';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
+import { signInAnonymously } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetInfo from '@react-native-community/netinfo';
 
-import { cacheFonts, cacheImages } from '../api/cache';
-import { font, icon } from '../theme';
 import { Navigation } from '../navigation';
 import { auth } from '../api/firebase';
+import { cacheFonts, cacheImages } from '../api/cache';
+import { font, icon } from '../theme';
+import { TextModal } from '../components/common/modal';
 import { APP_THEME_KEY } from '../api/constants';
-import { TextModal } from '../components/common';
 
 interface ILogoContainer {
   isWhite: boolean;

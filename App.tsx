@@ -1,20 +1,19 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useLayoutEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
-import { EventRegister } from 'react-native-event-listeners';
+import { ThemeProvider } from '@emotion/react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ThemeProvider } from '@emotion/react';
+import { EventRegister } from 'react-native-event-listeners';
 
+import Splash from './src/screens/Splash';
 import { lightTheme, darkTheme } from './src/theme';
-import { Splash } from './src/screens';
 import { APP_THEME_KEY } from './src/api/constants';
 
-//start
 const App = () => {
   const [theme, setTheme] = useState(lightTheme);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     EventRegister.addEventListener('changeTheme', (data) => {
       setTheme(data ? lightTheme : darkTheme);
     });
@@ -24,13 +23,13 @@ const App = () => {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     (async () => {
       await SystemUI.setBackgroundColorAsync(theme.color.tab.background);
     })();
   }, [theme.color.tab.background]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     (async () => {
       const appTheme = await AsyncStorage.getItem(APP_THEME_KEY);
 
